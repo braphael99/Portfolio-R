@@ -1,0 +1,60 @@
+```{r}
+raw <- tibble(
+  Gender = rep(c("F","M"), each = 2100),
+  Department = rep(c("A","B","C","D","E","F","A","B","C","D","E","F"),
+                   times = c(100,200,300,400,500,600,600,500,400,300,200,100)),
+  Admitted = rep(rep(c("No","Yes"), times = 12),
+                 times = c(20,80,60,140,120,180,200,200,300,200,420,180,
+                           180,420,200,300,200,200,180,120,140,60,80,20))
+) %>% slice(sample(1:n()))
+
+```
+
+```{r}
+count(raw, Department)
+```
+
+```{r}
+raw %>%
+group_by(Gender) %>%
+summarize("Applicants" = n(),
+          "Admits" = sum(Admitted == "Yes"),
+          "Rate" = Admits / Applicants) %>%
+ggplot(aes(x = Gender, y = Rate)) +
+  geom_col()
+
+```
+```{r}
+raw %>%
+group_by(Department, Gender) %>%
+summarize("Applicants" = n(),
+          "Admits" = sum(Admitted == "Yes"),
+          Rate = Admits / Applicants) %>%
+  ggplot(aes(x = Department, y = Rate)) +
+    geom_col(aes(fill = Gender),
+            position = "dodge")
+
+```
+```{r}
+raw %>% 
+  group_by(Department) %>%
+  summarize("Applicants" = n(), 
+            "Admits" = sum(Admitted == "Yes"),
+             Rate = Admits / Applicants)
+
+```
+
+```{r}
+wc <- A19_Admissions2
+```
+
+```{r}
+wc %>%
+  select(-All_Applicants, -All_Rate) %>%
+  pivot_longer(
+      cols = Female_Applicants:Male_Rate,
+      names_to = c("Gender",".value"),
+      names_sep="_")
+
+```
+

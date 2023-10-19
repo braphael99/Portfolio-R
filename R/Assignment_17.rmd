@@ -1,0 +1,145 @@
+Assignment Setup
+```{r}
+subframe <- iris
+```
+
+Problem 1
+```{r}
+subframe <- iris[iris$Species != "Setosa", ]
+
+boxplot(subframe$Sepal.Length~droplevels(subframe$Species),
+        main = "",
+        ylab = "Sepal Length in cm",
+        xlab = "",
+        ylim = c(3, 8),
+        col = "white",
+        las = 1)
+```
+Problem 2
+```{r}
+par(mfrow=c(1,2))
+
+boxplot(subframe$Sepal.Length~droplevels(subframe$Species),
+        main = "Sepal",
+        ylab = "Length in cm",
+        xlab = "",
+        ylim = c(3, 8),
+        col = "white",
+        las = 1)
+
+boxplot(subframe$Petal.Length~droplevels(subframe$Species),
+        main = "Petal",
+        ylab = "Length in cm",
+        xlab = "",
+        ylim = c(3, 8),
+        col = "white",
+        las = 1)
+```
+Problem 3
+```{r}
+par(mfrow=c(2,2))
+
+boxplot(subframe$Sepal.Length~droplevels(subframe$Species),
+        main = "",
+        ylab = "Length in cm",
+        xlab = "",
+        ylim = c(3, 8),
+        col = "white",
+        las = 1)
+
+boxplot(subframe$Petal.Length~droplevels(subframe$Species),
+        main = "",
+        ylab = "",
+        xlab = "",
+        ylim = c(3, 8),
+        col = "white",
+        las = 1)
+boxplot(subframe$Sepal.Width~droplevels(subframe$Species),
+        main = "",
+        ylab = "Width in cm",
+        xlab = "Sepal",
+        ylim = c(1, 4),
+        col = "white",
+        las = 1)
+boxplot(subframe$Petal.Width~droplevels(subframe$Species),
+        main = "",
+        ylab = "",
+        xlab = "Petal",
+        ylim = c(1, 4),
+        col = "white",
+        las = 1)
+```
+Problem 4
+```{r}
+plot(iris$Petal.Width, iris$Petal.Length,
+    main = "Iris Petals",
+    ylab = "Length in cm",
+    xlab = "Width in cm",
+    las = 1)
+```
+Problem 6
+```{r}
+plot(1:5, 6:10, col=1:5)
+```
+Problem 7
+```{r}
+species_color <- c(rep("red", times = nrow(iris[iris$Species == "Setosa", ])), rep("green", times = nrow(iris[iris$Species == "Versicolor", ])), rep("blue", times = nrow(iris[iris$Species == "Virginica", ])))
+
+plot(iris$Petal.Width, iris$Petal.Length,
+    col = species_color,
+    main = "Iris Petals",
+    ylab = "Length in cm",
+    xlab = "Width in cm",
+    las = 1)
+```
+Problem 9
+```{r}
+plot(iris$Petal.Width, iris$Petal.Length,
+    pch = 21,
+    bg = species_color,
+    col = species_color,
+    main = "Iris Petals",
+    ylab = "Length in cm",
+    xlab = "Width in cm",
+    las = 1)
+```
+Problem 10
+```{r}
+plot(iris$Petal.Width, iris$Petal.Length,
+    pch = 22,
+    bg = species_color,
+    main = "Iris Petals",
+    ylab = "Length in cm",
+    xlab = "Width in cm",
+    yaxt = "n",
+    xaxt = "n",
+    las = 1)
+axis(1,
+     at = c(1, 2)
+     )
+axis(2,
+     at = c(1, 3, 5, 7),
+     las = 1
+     )
+
+legend(
+  legend = c("setosa", "versicolor", "virginica"),
+  "topleft",
+  inset = c(0.1, .1),
+  fill = c("red", "green", "blue")
+)
+```
+Problem 11
+```{r}
+x=c(rep(5:1,5),     6)
+y=c(rep(5:1,each=5),1)
+
+plot.new()
+plot.window(c(1,5),c(0,5))
+
+points(x,y, pch=(25:0)[-8], col = "red", bg="green")
+
+text(x, y, labels=(25:0)[-8], pos=1, col = "orange")
+box()
+
+```

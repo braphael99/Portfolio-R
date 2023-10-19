@@ -1,0 +1,101 @@
+Assignment Setup
+```{r}
+dodgers <- read.csv(file = "dodgers.csv")
+#create a new data frame with our own feature names and ordering.
+df <- data.frame(
+  Attendance  = dodgers$attend,
+  Bobblehead  = dodgers$bobblehead,
+  Temperature = dodgers$temp,
+  ClearCloudy = dodgers$skies,
+  DayNight    = dodgers$day_night,
+  Fireworks   = dodgers$fireworks
+)
+
+```
+
+Problem 1
+```{r}
+boxplot(df$Attendance/ 1000 ~ df$Bobblehead,
+    main = "Attendance Increases with Bobblehead Promotion",
+    ylab = "Game Attendance (in thousands)",
+    xlab = "Were Bobbleheads Given?",
+    las = 1,
+    col = "white"
+)
+
+```
+Problem 2
+```{r}
+median(df$Attendance[df$Bobblehead=="YES"])
+```
+Problem 3
+```{r}
+median(df$Attendance[df$Bobblehead=="NO"])
+```
+Problem 4
+```{r}
+tapply(df$Attendance, df$Bobblehead, median)
+```
+Problem 5
+```{r}
+df$DOW <- factor(dodgers$day_of_week)
+```
+
+Problem 6
+```{r}
+df$DOW <- factor(dodgers$day_of_week,
+                 levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+levels(df$DOW) <- c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+```
+
+Problem 7
+```{r}
+table(df$Bobblehead)
+```
+Problem 8
+```{r}
+table(df$DOW)
+```
+Problem 9
+```{r}
+table(df$Bobblehead, df$DOW)
+```
+Problem 10
+```{r}
+rbind(
+table(df$Bobblehead, df$DOW),
+table(df$DOW))
+```
+Problem 11
+```{r}
+tab <- rbind(
+    table(df$Bobblehead, df$DOW),
+    table(df$DOW)
+    )
+
+rownames(tab) <- c("No-games", "Yes-games", "All-games")
+tab
+```
+Problem 12
+```{r}
+boxplot(df$Attendance/1000 ~ df$DOW,
+        main = "All Games",
+        ylab = "Attendance in Thousands",
+        xlab = "",
+        las = 1
+)
+
+boxplot(df$Attendance/1000 ~ df$DOW[df$Bobblehead == "NO"],
+        main = "Bobblehead-less Games",
+        ylab = "Attendance in Thousands",
+        xlab = "",
+        las = 1
+)
+
+```
+Problem 14
+```{r}
+barplot(tapply(df$Attendance/1000, list(df$Bobblehead,df$DOW), median),
+        beside=T, las=1)
+
+```

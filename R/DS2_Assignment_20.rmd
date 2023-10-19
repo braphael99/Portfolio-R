@@ -1,0 +1,39 @@
+```{r}
+options(dplyr.summarise.inform = FALSE)
+
+wc <- A20_Flight_PMU
+
+```
+
+```{r}
+arrange(wc, PM)
+
+wc %>%
+  arrange(PM)
+```
+
+```{r}
+wc %>%
+  count(airline)
+```
+
+```{r}
+wc %>%
+  mutate(units = PM / PMU) %>%
+  group_by(airline) %>%
+  summarize(Ave_PMU = sum(PM) / sum(units)) %>%
+  ggplot(aes(x = airline, y = Ave_PMU)) +
+     geom_col()
+
+
+```
+
+```{r}
+wc %>%
+  mutate(units = PM / PMU) %>%
+  group_by(airline, size) %>%
+  summarize(Ave_PMU = sum(PM) / sum(units))  %>% print %>%
+  ggplot(aes(x = size, y = Ave_PMU)) +
+    geom_col(aes(fill=airline), position="dodge")
+```
+

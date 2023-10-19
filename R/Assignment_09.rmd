@@ -1,0 +1,134 @@
+Dataset
+```{r}
+dfaq <- airquality
+
+data(airquality)
+head(airquality)
+
+```
+Problem 1
+```{r}
+?airquality
+```
+
+Problem 2
+```{r}
+str(airquality)
+```
+
+Problem 3
+```{r}
+is.na(airquality$Ozone)     #Calling the "is not available" function
+sum(is.na(airquality$Ozone))
+
+```
+Problem 4
+```{r}
+any(is.na(airquality$Solar.R))
+any(is.na(airquality$Temp))
+any(is.na(airquality$Ozone))
+```
+Problem 5
+```{r}
+hist(airquality$Wind,
+     main = "Wind Speed",
+     xlab = "Speed in MPH",
+     ylab = "Number of Days")
+```
+Problem 6
+```{r}
+hist(airquality$Temp,
+     main = "Temperature",
+     xlab = "Degrees in Fahrenheit",
+     ylab = "Number of Days")
+```
+Problem 8
+```{r}
+boxplot(
+  main="Temperature by Month",
+  ylab="Degrees Fahrenheit",
+  list(
+       May=airquality$Temp[airquality$Month==5],
+       Jun=airquality$Temp[airquality$Month==6],
+       Jul=airquality$Temp[airquality$Month==7],
+       Aug=airquality$Temp[airquality$Month==8],
+       Sep=airquality$Temp[airquality$Month==9])
+  )
+
+```
+Problem 9
+```{r}
+
+boxplot(
+  main="Wind Speed by Month",
+  ylab="Wind Speed in MPH",
+  list(
+       May=airquality$Wind[airquality$Month==5],
+       Jun=airquality$Wind[airquality$Month==6],
+       Jul=airquality$Wind[airquality$Month==7],
+       Aug=airquality$Wind[airquality$Month==8],
+       Sep=airquality$Wind[airquality$Month==9])
+  )
+```
+Problem 10
+```{r}
+boxplot(
+  main="Wind Speed by Month",
+  ylab="Wind Speed in MPH",
+  list(
+       Early=airquality$Wind[airquality$Month<=6],
+       Late=airquality$Wind[airquality$Month>=7])
+  )
+```
+Problem 11
+```{r}
+airquality$Month <- factor(airquality$Month, levels = c("May", "Jun", "Jul", "Aug", "Sep"))
+```
+
+Problem 12
+```{r}
+hist(airquality$Wind, col="green")
+```
+
+Problem 13
+```{r}
+hist(airquality$Wind, col="red")
+```
+Problem 14
+```{r}
+hist(airquality$Wind[1:100],
+     main = "Wind Speed",
+     xlab = "Speed in MPH",
+     ylab = "Number of Days")
+```
+Problem 15
+```{r}
+hist(airquality$Wind[airquality$Temp > 70],
+     main = "Wind Speed",
+     xlab = "Speed in MPH",
+     ylab = "Number of Days")
+```
+Problem 16
+```{r}
+FHeights <- rnorm(100, 65, 1.5)
+```
+
+Problem 17
+```{r}
+FHeights <- round(FHeights)
+
+FHeights
+```
+Problem 18
+```{r}
+hist(FHeights,
+     main = "Female Heights",
+     xlab = "Height in Inches",
+     ylab = "Number of Females")
+```
+Problem 19
+```{r}
+boxplot(FHeights,
+     main = "Female Heights",
+     ylab = "Height in Inches")
+```

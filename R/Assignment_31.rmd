@@ -1,0 +1,148 @@
+Assignment Setup
+```{r}
+strip <- function(txt){
+  txt <- toupper(txt)
+  charVec <- strsplit(txt, "")[[1]]
+  letterVec <- charVec["A" <= charVec & charVec <= "Z"]
+  return(paste(letterVec,collapse=""))
+}
+
+toNumbers <- function(plain){
+  letterVec <- strsplit(plain,"")[[1]]
+  letterVec <- factor(letterVec, levels=LETTERS)
+  return(as.numeric(letterVec))
+}
+
+toLetters <- function(numVec){
+  numVec <- factor(numVec, levels=1:26)
+  levels(numVec) <- LETTERS
+  return(paste(numVec, collapse = ""))
+}
+
+shift <- function(numVec, key){
+  numVec <- numVec + key
+  numVec <- numVec %% 26
+  numVec <- ifelse(numVec == 0, 26, numVec)
+  return(numVec)
+}
+
+```
+
+Problem 2
+```{r}
+gettyTxt <- "Four score and seven years ago today, our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all people are created equal."
+
+gettyPlain <- strip(gettyTxt)
+
+gettyNum <- toNumbers(gettyPlain)
+gettyNum
+```
+Problem 3
+```{r}
+gettyCode <- toLetters(shift(gettyNum, 10))
+gettyCode
+```
+Problem 4
+```{r}
+multiply <- function(numVec, m){
+  numVec <- numVec * m
+  numVec <- numVec %% 26
+  numVec <- ifelse(numVec == 0, 26, numVec)
+  return(numVec)
+}
+
+```
+
+Problem 5
+```{r}
+gettyCode <- toLetters(multiply(gettyNum, 13))
+gettyCode
+```
+Problem 7
+```{r}
+sueCode<-"IUSDGJGTTGQVWZGAFQBIUSFQJGSDBWVWBKOUDGBUWVGBLQLGTWKQOUUPGRQMLVG"
+for(m in seq(1,25,2)[-7]){
+  print(toLetters(multiply(toNumbers(sueCode), m)))
+}
+```
+Problem 9
+```{r}
+linear <- function(numVec, m, b){
+   numVec <- numVec * m
+   numVec <- numVec %% 26
+   numVec <- ifelse(numVec == 0, 26, numVec)
+
+   numVec <- numVec + b
+   numVec <- numVec %% 26
+   numVec <- ifelse(numVec == 0, 26, numVec)
+   return(numVec)
+}
+
+```
+
+Problem 10
+```{r}
+linear <- function(numVec, m, b){
+   numVec <- numVec * m
+   numVec <- numVec + b
+   numVec <- numVec %% 26
+   numVec <- ifelse(numVec == 0, 26, numVec)
+   return(numVec)
+}
+
+```
+
+Problem 11
+```{r}
+linear <- function(numVec, m, b){
+   numVec <- numVec * m + b
+   numVec <- numVec %% 26
+   numVec <- ifelse(numVec == 0, 26, numVec)
+   return(numVec)
+}
+```
+
+Problem 12
+```{r}
+linear<- function(nums, m, b){
+   return(shift(multiply(nums, m), b))
+}
+linear(1:4, 6, 3)   #Should output 9 15 21 1
+
+```
+Problem 13
+```{r}
+plainTxt <- strip("I finally realized that people are prisoners of their phones... that's why it's called a 'cell' phone.")
+
+numTxt <- toNumbers(plainTxt)
+
+myCode <- toLetters(linear(numTxt,7,3))
+print(myCode)
+```
+Problem 14
+```{r}
+print(toLetters(linear(toNumbers(myCode), 15, 7)))
+```
+Problem 17
+```{r}
+prop <-c(.073,.009,.030,.044,.130,.028,.016,
+         .035,.074,.002,.003,.035,.025,.078,
+         .074,.027,.003,.077,.063,.093,.027,
+         .013,.016,.005,.019,.001)
+sum(prop)
+```
+Problem 18
+```{r}
+barplot(prop,
+        yaxt = "n")
+axis(side = 2,
+     at = c(0.00, 0.04, 0.08, 0.12))
+```
+Problem 20
+```{r}
+names(prop) <- LETTERS
+
+barplot(prop,
+        main = "English Frequency Distribution of Letters",
+        las = 1)
+```

@@ -1,0 +1,158 @@
+Problem setup
+```{r}
+strip <- function(txt){
+  txt <- toupper(txt)
+  charVec <- strsplit(txt, "")[[1]]
+  letterVec <- charVec["A" <= charVec & charVec <= "Z"]
+  return(paste(letterVec, collapse=""))
+}
+
+toNumbers <- function(plain){
+  letterVec <- strsplit(plain,"")[[1]]
+  letterVec <- factor(letterVec, levels=LETTERS)
+  return(as.numeric(letterVec))
+}
+
+shift <- function(nums, key){
+  nums <- (nums + key) %% 26
+  nums <- ifelse(nums == 0, 26, nums)
+  return(nums)
+}
+
+multiply <- function(numVec, m){
+  numVec <- numVec * m
+  numVec <- numVec %% 26
+  numVec <- ifelse(numVec == 0, 26, numVec)
+  return(numVec)
+}
+
+linear <- function(numVec, m, b){
+   return(shift(multiply(numVec,m),b))
+}
+
+toLetters <- function(numVec){
+  numVec <- factor(numVec, levels=1:26)
+  levels(numVec) <- LETTERS
+  return(paste(numVec, collapse = ""))
+}
+
+props <- c(.073,.009,.030,.044,.130,.028,.016,
+                .035,.074,.002,.003,.035,.025,.078,
+                .074,.027,.003,.077,.063,.093,.027,
+                .013,.016,.005,.019,.001)
+
+```
+
+Problem 1
+```{r}
+sum(props^2)
+```
+Problem 5
+```{r}
+kappa <- function(txt){
+   plainTxt <- strip(txt)
+   plainNums <- toNumbers(plainTxt)
+   plainFactor <- factor(plainNums, levels=1:26)
+   freq <- table(plainFactor) / length(plainNums)
+   return(sum(freq^2))
+}
+
+```
+
+Problem 11
+```{r}
+gettyTxt <- "Four score and seven years ago today, our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all people are created equal."
+kappa(gettyTxt)
+
+gettyNums <- toNumbers(strip(gettyTxt))
+kappa(toLetters(linear(gettyNums, 7, 4)))
+kappa(toLetters(linear(gettyNums, 9, 3)))
+kappa(toLetters(linear(gettyNums, 3, 8)))
+
+```
+Problem 12
+```{r}
+kIndex <- function(numVec){
+   plainFactor <- factor(numVec, levels = 1:26)
+   freq <- table(plainFactor) / length(numVec)
+   return(sum(freq*props))
+}
+
+gettyNums <- toNumbers(strip(gettyTxt))
+print(kIndex(gettyNums))  #outputs 0.06912583
+
+```
+Problem 13
+```{r}
+gettyTxt <- "Four score and seven years ago today, our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all people are created equal."
+
+gettyPlain <- strip(gettyTxt)
+gettyNums  <- toNumbers(gettyPlain)
+gettyCodedNums <- linear(gettyNums, 7, 4)
+gettyCoded <- toLetters(gettyCodedNums)
+print(gettyCoded)
+
+```
+Problem 14
+```{r}
+codeNums <- toNumbers(gettyCoded)
+```
+
+Problem 17
+```{r}
+maxK = 0
+for(m in seq(1,25,2)[-7]){
+   for(b in 0:25){
+      nums <- linear(codeNums, m, b)
+      if(kIndex(nums) > maxK){
+         maxK <- kIndex(nums)  #Update to new maximum
+	}
+   }
+}
+print(maxK)
+
+```
+Problem 19
+```{r}
+maxK = 0    #Maximum k-index seen so far
+keyB = 0    #b-key associated with maximum k-index
+keyM = 0  #m-key associated with maximum k-index
+
+for(b in 0:25){
+  for(m in seq(1,25,2)[-7]){
+    nums <- linear(codeNums, m, b)
+      if(kIndex(nums) > maxK){
+        keyB = b
+        keyM = m
+        maxK <- kIndex(nums)
+      }
+  }
+}
+
+EnglishNums <- linear(codeNums, keyM, keyB)
+print(toLetters(EnglishNums))
+
+
+```
+Problem 20
+```{r}
+codeNums<- toNumbers("ITBGWZTLABYTPGTBCSFTOWZFTICATCLDTRCABCJTRKTOIIZLOPIBCBRXLTOXTCZPTCATGJTRTTDCZMTHLOIGTIRKLGLCRLJBRAZKLOPCABCJTXZNSIMTRZDTCALOPDZGTCABOWNRCIBCBRXLTOXTMNIILTRJABCIZFZNCALOH")
+
+maxK = 0    #Maximum k-index seen so far
+keyB = 0    #b-key associated with maximum k-index
+keyM = 0  #m-key associated with maximum k-index
+
+for(b in 0:25){
+  for(m in seq(1,25,2)[-7]){
+    nums <- linear(codeNums, m, b)
+      if(kIndex(nums) > maxK){
+        keyB = b
+        keyM = m
+        maxK <- kIndex(nums)
+      }
+  }
+}
+
+EnglishNums <- linear(codeNums, keyM, keyB)
+print(toLetters(EnglishNums))
+```

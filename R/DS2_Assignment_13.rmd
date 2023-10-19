@@ -1,0 +1,50 @@
+```{r}
+wc <- A13_Pokemon
+```
+
+```{r}
+filter(wc, word(abilities) == "Stench")
+
+```
+Problem 7
+```{r}
+wc1 <- filter(wc, str_detect(abilities, "Ice Body") == TRUE)
+wc2 <- filter(wc, str_detect(abilities, "Thick Fat") == TRUE)
+wc3 <- filter(wc, str_detect(abilities, "Ice") & str_detect(abilities, "Fat"))
+
+```
+
+Problem 10
+```{r}
+filter(wc, str_detect(abilities, "Armor") == TRUE)
+
+```
+
+Problem 11
+```{r}
+filter(wc, 
+       str_detect(abilities, "Armor") == TRUE,        #include all armor
+       str_detect(abilities, "Weak Armor") == FALSE,  #then exclude weak armor
+       is_legendary == "no")
+
+```
+
+Problem 12
+```{r}
+
+count(filter(wc, str_detect(abilities, "Chlorophyll") == TRUE), type)
+
+```
+
+Problem 13
+```{r}
+mutate(rename(wc, "Name" = name) = str_to_lower(name))
+
+
+```
+Problem 16
+```{r}
+  filter(wc, (str_detect(abilities, "Pressure") | str_detect(abilities, "Levitate")) & str_detect(abilities, "Telepathy") == FALSE) %>%
+  count(type)
+
+```

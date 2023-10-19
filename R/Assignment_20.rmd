@@ -1,0 +1,117 @@
+Problem 1
+```{r}
+seconds <- round(faithful$eruptions * 60)
+
+```
+Problem 2
+```{r}
+tab <- table(seconds %% 5)
+tab
+```
+Problem 3
+```{r}
+barplot(tab,
+        main = "Distribution of Eruption Durations",
+        ylab = "Frequency",
+        xlab = "Time in Secs Modulo 5",
+        sub = "(Are experimenters rounding to multiples of 5?)"
+        )
+```
+Problem 4
+```{r}
+df <- data.frame(
+  wait = faithful$waiting,
+  dur = round(faithful$eruptions * 60)
+  
+)
+
+head(df)
+```
+
+Problem 6
+```{r}
+plot(1:10, 2:11)
+lines(c(2,5),c(10,6))
+lines(c(5,7),c(6,9), col="red")
+text(2,10, "2,10",pos=1)
+text(5,6,  "5,6", pos=3)
+text(7,9,  "7,9", pos=2)
+text(8,4,  "8,4", pos=4, col="green")
+lines(c(7,8), c(9,4), col = "green")
+```
+Problem 7
+```{r}
+wait_cut <- 68.5
+dur_cut <- 192
+
+plot(df$wait, df$dur)
+lines(c(wait_cut, wait_cut), c(0, 500))
+lines(c(0, 100), c(dur_cut, dur_cut))
+```
+Problem 8
+```{r}
+animals <- c("dog","cat","pig","dog","rat")
+animals <- ifelse(animals == "dog", "Canine",
+           ifelse(animals == "cat", "Feline",
+           ifelse(animals == "pig", "Porcine",
+                  animals)))
+animals
+
+```
+```{r}
+df$size <- ifelse(df$wait < wait_cut & df$dur < dur_cut, "small",
+           ifelse(df$wait > wait_cut & df$dur > dur_cut, "big",
+                  "unclear"))
+
+df[163:167, ]
+```
+Problem 11
+```{r}
+df$size <- factor(df$size)
+df
+```
+Problem 12
+```{r}
+wait_cut <- 68.5
+dur_cut <- 192
+
+plot(df$wait, df$dur,
+     col = factor(df$size))
+lines(c(wait_cut, wait_cut), c(0, 500))
+lines(c(0, 100), c(dur_cut, dur_cut)
+      )
+```
+Problem 13
+```{r}
+plot(df$wait, df$dur,
+     col = df$size)
+
+legend(legend = c("big", "unclear", "small"),
+       fill = c(1, 3, 2),
+       "topleft",
+       inset = c(0.1,0.1)
+       )
+```
+Problem 15
+```{r}
+type(rownames(df[df$size == "unclear", ]))
+```
+Problem 17
+```{r}
+as.numeric(rownames(df[df$size == "unclear", ]))
+```
+Problem 18
+```{r}
+df$case_num <- rownames(df)
+```
+
+Problem 19
+```{r}
+df <- df[c(4,1,2,3)]
+```
+
+Problem 20
+```{r}
+df <- df[c(1,3,2,4)]
+colnames(df)
+```

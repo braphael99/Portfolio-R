@@ -1,0 +1,223 @@
+Problem 1
+```{r}
+?faithful
+```
+
+Problem 2
+```{r}
+par(mfrow=c(1,2))
+boxplot(faithful$waiting,
+        main = "Time before eruption",
+        ylab = "Minutes",
+        col = "white",
+        las = 1)
+boxplot(faithful$eruptions,
+        main = "Duration of Eruption",
+        ylab = "Minutes",
+        yaxt = "n",
+        col = "white"
+        )
+axis(2,
+     at = c(2,3,4,5),
+     las = 1)
+```
+
+
+Problem 5
+```{r}
+par(mfrow=c(1,2))
+hist(faithful$waiting,
+        main = "Time before eruption",
+        ylab = "Frequency",
+        xlab = "Minutes",
+        col = "white",
+        yaxt = "n",
+        ylim = c(0,80)
+     )
+axis(2,
+     at = c(0, 20, 40, 60, 80),
+     las = 1)
+hist(faithful$eruptions,
+        main = "Duration of Eruption",
+        ylab = "Frequency",
+        xlab = "Minutes",
+        yaxt = "n",
+        col = "white",
+        ylim = c(0,80)
+        )
+axis(2,
+     at = c(0, 20, 40, 60, 80),
+     las = 1)
+```
+
+Problem 6
+```{r}
+par(mfrow=c(2,2))
+
+boxplot(faithful$waiting,
+        main = "Time before eruption",
+        col = "white",
+        las = 1,
+        ylim = c(40,100),
+        horizontal = TRUE
+        )
+boxplot(faithful$eruptions,
+        main = "Duration of Eruption",
+        xaxt = "n",
+        col = "white",
+        ylim = c(1,5.5),
+        horizontal = TRUE
+        )
+axis(1,
+     at = c(1,2,3,4,5),
+     las = 1)
+hist(faithful$waiting,
+        main = "",
+        ylab = "Frequency",
+        xlab = "Minutes",
+        col = "white",
+        yaxt = "n",
+        ylim = c(0,80)
+     )
+axis(2,
+     at = c(0, 20, 40, 60, 80),
+     las = 1)
+hist(faithful$eruptions,
+        main = "",
+        ylab = "",
+        xlab = "Minutes",
+        yaxt = "n",
+        xaxt = "n",
+        col = "white",
+        ylim = c(0,80),
+        xlim = c(1, 6)
+        )
+axis(2,
+     at = c(0, 20, 40, 60, 80),
+     las = 1)
+axis(1,
+     at = c(1, 2, 3, 4, 5)
+     )
+
+```
+
+Problem 7
+```{r}
+plot(faithful$waiting, faithful$eruptions,
+     main = "",
+     ylab = "Duration of Eruption in Minutes",
+     xlab = "Time before Eruption in Minutes",
+     yaxt = "n")
+axis(2,
+     at = c(2,3,4,5),
+     las = 1)
+```
+
+Problem 9
+```{r}
+par(mfrow=c(1,2))
+plot(faithful$eruptions[1:20],
+     type = "l"
+     )
+plot(faithful$eruptions[1:20],
+     type = "h"
+     )
+```
+
+Problem 10
+```{r}
+x <- faithful$waiting
+y <- faithful$eruptions * 60
+plot(x,y, 
+     main = "Old Faithful",
+     xlab = "Waiting Time (min)",
+     ylab = "Eruption Length (sec)",
+     las = 1
+)
+
+```
+
+
+Problem 11
+```{r}
+num <- 3
+if(num <= 3){
+  print("small number")   #first block of code
+}else{
+  print("big number")     #second block of code
+}
+print("------------")
+
+num <- 7
+if(num <= 3){
+  print("small number")    #first block of code (1 statement)
+}else{
+  print("big number")	    #second block of code (2 statements)
+  print("way to go!")
+}
+
+```
+
+Problem 13
+```{r}
+name <- "dog"
+if(nchar(name) <= 3){
+  print("short word")
+}else{
+  print("long word")
+}
+
+name <- "catfish"
+if(nchar(name) <= 3){
+  print("short word")
+}else{
+  print("long word")
+}
+
+```
+Problem 15
+```{r}
+df <- iris
+print(class(df[[1]]))
+
+```
+
+Problem 16
+```{r}
+df <- iris
+print(class(df[[ncol(df)]]))
+
+```
+
+Problem 17
+```{r}
+df <- iris
+if(class(df[[1]]) == "numeric"){
+  print("The first column has numeric data")
+}else{
+  print("The first column has non-numeric data")
+}
+
+```
+
+Problem 18
+```{r}
+df <- iris
+if(class(df[[ncol(df)]]) == "numeric"){
+  print("The last column has numeric data")
+}else{
+  print("The last column has non-numeric data")
+}
+
+```
+Problem 19
+```{r}
+df <- faithful
+if(nrow(df[ncol(df)]) <= 50){
+        print("Insufficient Sample Size")
+}else if(class(df[[ncol(df)]]) != "numeric"){
+        print("Not Numeric")
+}else{
+        print(mean(df[[ncol(df)]]))
+}
+```

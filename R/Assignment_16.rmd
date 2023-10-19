@@ -1,0 +1,179 @@
+Problem 1
+```{r}
+iris$Petal.Length
+iris$"Petal.Length"
+```
+Problem 2
+```{r}
+iris$Petal.Length[ "setosa" ]
+iris$Petal.Length[ iris$Species == "setosa" ]
+
+```
+Problem 3
+```{r}
+iris[3]
+
+
+```
+
+Problem 4
+```{r}
+maxSetosaPL <- max(iris$Petal.Length[ iris$Species == "setosa" ])
+```
+
+Problem 5
+```{r}
+minVersicolorPL <- min(iris$Petal.Length[ iris$Species == "versicolor" ])
+```
+
+Problem 6
+```{r}
+midLength <- mean(c(maxSetosaPL, minVersicolorPL))
+```
+
+Problem 7
+```{r}
+boxplot(iris$Petal.Length ~ iris$Species,
+        main = "Petal Length by Iris Species",
+        ylab = "Centimeters",
+        xlab = "")
+lines( c(0.5, 3.5), c(midLength, midLength), col="red" )
+
+```
+Problem 8
+```{r}
+maxSetosaPW <- max(iris$Petal.Width[iris$Species == "setosa"])
+```
+
+Problem 9
+```{r}
+minVersicolorPW <- min(iris$Petal.Width[iris$Species == "versicolor"])
+```
+
+Problem 10
+```{r}
+midWidth <- mean(c(maxSetosaPW, minVersicolorPW))
+```
+
+Problem 11
+```{r}
+boxplot(iris$Petal.Width~iris$Species,
+        main = "Petal Width by Iris Species",
+        xlab ="",
+        ylab = "Centimeters",
+        yaxt = "n",
+        ylim = c(0,3),
+        col = "white"
+        )
+axis(2,
+     at = c(0,1,2,3),
+     las = 1
+     )
+lines( c(0.5, 3.5), c(midWidth, midWidth), col="red" )
+```
+
+
+Problem 12
+```{r}
+levels(iris$Species) <- c("Setosa", "Versicolor", "Virginica")
+boxplot(iris$Petal.Width~iris$Species,
+        main = "Petal Width by Iris Species",
+        xlab ="",
+        ylab = "Centimeters",
+        yaxt = "n",
+        ylim = c(0,3),
+        col = "white"
+        )
+axis(2,
+     at = c(0,1,2,3),
+     las = 1
+     )
+lines( c(0.5, 3.5), c(midWidth, midWidth), col="red" )
+```
+Problem 13
+```{r}
+setosaDF <- iris[ iris$Species == "Setosa", c(-3,-4)]
+setosaDF
+```
+
+Problem 14
+```{r}
+irisSubFrame <- iris[iris$Sepal.Length > (2.5 * iris$Sepal.Width), ]
+irisSubFrame
+```
+
+Problem 15
+```{r}
+plot(NULL, 
+     xlab="",ylab="",    
+     xaxt="n",yaxt="n", 
+     xlim=c(0,100), ylim=c(0,100), 
+     bty="n" 
+)
+
+lines(c(0,100,100,0,0),c(0,0,100,100,0))
+
+lines(c(0,100),c(0,100), col="green")
+lines(c(100,0),c(0,100), col="blue")
+```
+Problem 17
+```{r}
+plot(NULL, 
+     xlab="",ylab="", 
+     xaxt="n",yaxt="n",
+     xlim=c(0,100), ylim=c(0,100), 
+     bty="n"
+)
+
+lines(c(0,100,100,0,0),c(0,0,100,100,0))
+
+for(i in 1:9){
+   lines(c(10*i,10*i), c(10*i,100))
+}
+
+```
+Problem 18
+```{r}
+plot(NULL, 
+     xlab="",ylab="", 
+     xaxt="n",yaxt="n",
+     xlim=c(0,100), ylim=c(0,100), 
+     bty="n"
+)
+
+lines(c(0,100,100,0,0),c(0,0,100,100,0))
+
+for(i in 1:9){
+   lines(c(10*i,10*i), c(10*i,100))
+  lines(c(10*i,100), c(10*i,10*i))
+}
+```
+Problem 19
+```{r}
+plot(NULL, xlab="",ylab="", xaxt="n",yaxt="n",
+     xlim=c(0,100), ylim=c(0,100), bty="n")
+lines(c(0,100,100,0,0),c(0,0,100,100,0))
+
+x <- sample(1:100)
+y <- sample(1:100)
+lines(x,y)
+
+```
+Problem 20
+```{r}
+plot(NULL, xlab="",ylab="", xaxt="n",yaxt="n",
+     xlim=c(0,100), ylim=c(0,100), bty="n")
+lines(c(0,100,100,0,0),c(0,0,100,100,0))
+
+x <- sample(1:100)
+y <- sample(1:100)
+color <- sample(2:9, 99,replace=T) #pick 99 random color numbers from 2-9
+
+for(i in 1:99){
+   lines(x[i:(i+1)], y[i:(i+1)], col=color[i])
+
+   # be careful: the following won't work. The parentheses are needed.
+   # lines(x[i:i+1], y[i:i+1], col=color[i])
+}
+
+```

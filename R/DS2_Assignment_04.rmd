@@ -1,0 +1,47 @@
+Problem 1
+```{r}
+wc <- A04_EPA_Cars
+```
+
+Problem 6
+```{r}
+ggplot(data = wc,
+       aes(x = Displacement, y = MPG))+
+  geom_point(aes(color = Class))
+```
+Problem 8
+```{r}
+count (wc, Cylinders)
+```
+
+Problem 12
+```{r}
+wc1 <- filter(wc, Class != "2seater")
+wc2 <- filter(wc1, Cylinders != "5Cyl")
+```
+
+Problem 13
+```{r}
+ggplot(data = wc2,
+       aes(x = Displacement, y = MPG))+
+  geom_point(aes(color = Cylinders))
+```
+Problem 14
+```{r}
+ggplot(data = wc2,
+       aes(x = Displacement, y = MPG))+
+  geom_point(aes(shape = Cylinders))
+```
+Problem 17
+```{r}
+ggplot(data = wc2, 
+       aes(x = Displacement, y = MPG)) + 
+    geom_point(aes(shape = Class, color = Cylinders), position = "jitter")
+
+```
+Problem 19
+```{r}
+ggplot(data = wc2, 
+       aes(x = Displacement, y = Cylinders)) + 
+    geom_point(position = "jitter")
+```

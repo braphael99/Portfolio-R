@@ -1,0 +1,155 @@
+Assignment Setup
+```{r}
+
+```
+
+Problem 1
+```{r}
+unique(mtcars$carb)
+mtcars$carb
+```
+Problem 2
+```{r}
+table(mtcars$carb)
+```
+Problem 3
+```{r}
+table(mtcars$carb,mtcars$cyl)
+```
+Problem 4
+```{r}
+df <- mtcars
+mtcars$mpg[16] <- NA
+df
+```
+
+Problem 5
+```{r}
+length(mtcars$mpg[mtcars$mpg > 20])
+```
+Problem 6
+```{r}
+max(mtcars$hp)
+which(mtcars$hp == max(mtcars$hp))
+
+```
+Problem 7
+```{r}
+boxplot(mtcars$mpg~mtcars$cyl,
+        main = "With more Cylinders, MPG Decreases",
+        xlab = "Number of Cylinders",
+        ylab = "MPG")
+```
+Problem 9
+```{r}
+plot(mtcars$mpg~mtcars$disp,
+     main="MPG vs Displacement",
+     xlab="Displacement (cu in)",
+     ylab="Miles per Gallon"
+)
+
+```
+Problem 11
+```{r}
+mtcars$size[mtcars$wt <= 3] <- "small"
+mtcars$size[mtcars$wt >  3] <- "big"
+
+mtcars$size
+
+mtcars$size <- factor(mtcars$size)
+levels(mtcars$size) <- c("small", "big")
+
+table(mtcars$size)
+```
+Problem 12
+```{r}
+barplot(table(mtcars$am),
+        main = "Frequency of Automatic and Manual Transmissions",
+        ylab = "Frequency")
+```
+Problem 13
+```{r}
+barplot(table(mtcars$carb),
+        main = "Carburator Distribution",
+        xlab = "Number of Carburators",
+        ylab = "Frequency")
+```
+Problem 14
+```{r}
+barplot(table(mtcars$carb),
+        main = "Carburator Distribution",
+        xlab = "Number of Carburators",
+        ylab = "Frequency",
+        col = "red",
+        las = 1)
+```
+Problem 15
+```{r}
+barplot(table(mtcars$carb), 
+        horiz=T,
+        main="Carburateur Distribution",
+        xlab="Frequency",
+        ylab="Number of Carburateurs"
+)
+
+```
+Problem 16-20 setup
+```{r}
+df <- data.frame(
+  type   = sample(1:4,size=100,replace=T),
+  length = runif(min=20,max=40,n=100),
+  day = factor(
+          sample(c("Mon","Tue","Wed","Thu","Fri"), size=100, replace=T),
+          levels=c("Mon","Tue","Wed","Thu","Fri"))
+)
+```
+
+Problem 16
+```{r}
+boxplot(df$length,
+        main = "Distribution of Lengths",
+        ylab = "Inches")
+```
+Problem 17
+```{r}
+boxplot(df$length~df$day,
+        main = "Distribution of Lengths by Day",
+        xlab = "Day",
+        ylab = "Inches")
+```
+Problem 18
+```{r}
+barplot(table(df$type),
+        main = "Distribution of Type",
+        xlab = "Type Number",
+        ylab = "Frequency")
+```
+
+Problem 19
+```{r}
+barplot(table(df$type,df$day), beside=F,
+        main="Distribution of Types by Day",
+        xlab="Day",
+        ylab="Frequency"
+)
+
+```
+Problem 20
+```{r}
+#Re-label the days:
+dayAbbrev <- factor(df$day, labels=c("M","T","W","R","F"))
+
+par(mfrow=c(1,2))  #two plots in a 1x2 grid (a "matrix frame" by rows)
+barplot(tapply(df$length, dayAbbrev, mean),
+        main="Mean Length by Day",
+        xlab="Day",
+        ylab="Inches"
+)
+barplot(tapply(df$length, dayAbbrev, sum),
+        main="Total Length by Day",
+        xlab="Day",
+        ylab="Inches"
+)
+
+```
+

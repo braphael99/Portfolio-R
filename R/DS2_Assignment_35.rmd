@@ -1,0 +1,64 @@
+```{r}
+wc <- A35_fake_data
+wc <- mutate(wc, cat1 = factor(cat1), cat2 = factor(cat2))
+
+```
+
+```{r}
+wc %>% 
+   ggplot(aes(y = cat2 )) + geom_bar()
+
+```
+
+```{r}
+wc  %>% 
+   ggplot(aes(y = num1 )) +
+      geom_boxplot()
+
+```
+
+```{r}
+wc  %>% 
+  ggplot(aes(x = num1 )) +
+    geom_histogram(bins = 8)
+
+```
+
+```{r}
+wc %>%
+  ggplot(aes( x = num2)) +
+   geom_histogram(bins = 6, col = "red")
+```
+
+```{r}
+wc  %>% 
+   ggplot(aes(x = cat1 )) + 
+     geom_bar(aes(fill = cat2), 
+              position = "dodge")
+
+```
+
+```{r}
+wc %>% 
+  ggplot(aes(x = num1, y = num2)) +
+    geom_point(aes(color = cat2, pch = cat1))
+```
+
+```{r}
+wc %>%
+  ggplot(aes(x = num1, y = num2)) +
+    geom_point(aes(color = cat1))
+
+```
+
+```{r}
+wc %>% 
+  group_by(cat1, cat2) %>% 
+  summarize(Num1_Mean = mean(num1)) %>% 
+  ggplot(aes(x = cat1, 
+             y = Num1_Mean)) +
+     geom_col(aes(fill = cat2), 
+              position = "dodge")
+
+```
+

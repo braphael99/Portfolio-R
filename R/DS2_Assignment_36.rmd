@@ -1,0 +1,57 @@
+```{r}
+wc <- dodgers_1_
+```
+
+```{r}
+wc %>% 
+  mutate(month       = factor(month,       levels = c("APR","MAY","JUN","JUL","AUG","SEP","OCT")),
+         day_of_week = factor(day_of_week, levels = c("Monday", "Tuesday", "Wednesday", "Thursday",
+                                                      "Friday", "Saturday", "Sunday")))
+
+
+```
+
+```{r}
+wc %>% 
+ggplot(aes(x = temp, 
+           y = attend/10000)) +
+   geom_point(aes(color = day_night))
+
+```
+
+```{r}
+wc %>% 
+  ggplot(aes(x = temp, y = attend)) +
+     geom_point() + 
+     facet_wrap(~day_night)
+
+```
+
+```{r}
+wc %>% 
+  ggplot(aes(x = temp, y = attend)) + 
+    geom_point() + 
+    facet_grid(skies ~ day_night)
+```
+```{r}
+wc %>% 
+  ggplot(aes(x = temp, y = attend)) + 
+     geom_point() + 
+     facet_grid(skies ~ day_night, margins = FALSE)
+```
+
+```{r}
+wc %>% 
+  ggplot(aes(x = temp, y = attend)) + 
+     geom_point(aes(color=fireworks)) + 
+        facet_grid(skies ~ day_night)
+
+```
+
+```{r}
+wc %>% 
+  ggplot(aes(x = temp, y = attend)) + 
+     geom_point(aes(color=day_of_week, pch = fireworks)) + 
+        facet_grid(skies ~ day_night)
+```
+

@@ -1,0 +1,106 @@
+Assignment Setup
+```{r}
+
+```
+
+Problem 1
+```{r}
+People <- data.frame(
+   G = factor( rep(c("F", "M"), each = 4), c("F", "M")),
+   S = factor( rep(c("A", "B"), times = 2), c("A", "B")),
+   V = c(10, 12, 12, 14, 15, 16, 17, 16)
+)
+
+People
+
+```
+Problem 2
+```{r}
+tab <- table(People$G)
+barplot(tab,
+        main = "Count by Gender",
+        ylab = "Count",
+        yaxt="n"   #suppresses original y-axis
+)
+#Note that the following is a function outside of the bar plot!
+axis(side=2,        #adds a y-axis on the left
+     at=c(0,2,4))   #with specified labels [0 2 4] at the y-axis tick marks
+
+```
+Problem 3
+```{r}
+tab <- tapply(People$V, People$G, mean)
+
+barplot(tab,
+        main = "Mean by Gender",
+        ylab = "Mean Value",
+        yaxt = "n"
+)
+axis(side=2,at=seq(0,16,2))
+
+```
+Problem 4
+```{r}
+tab <- table(People$S, People$G)
+barplot(tab,
+        beside = T,
+        main = "Count for Each Status by Gender",
+        ylab = "Count",
+        yaxt = "n")
+axis(side = 2,
+     at = seq(0, 3, 1))
+```
+Problem 5
+```{r}
+tab <- table(People$S, People$G)
+barplot(tab,
+        beside = T,
+        main = "Count for Each Status by Gender",
+        ylab = "Count",
+        yaxt = "n",
+        col = c("Red", "Blue"))
+axis(side = 2,
+     at = seq(0, 3, 1))
+legend(
+   legend=c("A","B"),
+   fill=c("Red","Blue"),
+   "topleft", inset=c(.1,0),
+   title="Status",
+   horiz=T
+)
+
+```
+Problem 6
+```{r}
+tab <- table(People$S, People$G)
+barplot(tab,
+        beside = T,
+        main = "Count for Each Status by Gender",
+        ylab = "Count",
+        yaxt = "n",
+        col = c("Red", "Blue"))
+axis(side = 2,
+     at = seq(0, 3, 1))
+legend(
+   legend=c("A","B"),
+   fill=c("Red","Blue"),
+   "topright", inset=c(.01,0),
+   title="Status",
+   horiz=F,
+   bg = "Green"
+)
+```
+Problem 7
+```{r}
+tab <- tapply(People$V, list(People$S, People$G), mean)
+
+barplot(tab,
+        beside = T,
+        main = "Mean for Each Status by Gender",
+        ylab = "Mean Value",
+        yaxt = "n"
+)
+axis(side = 2,
+     at = seq(0, 16, 2)
+     )
+```

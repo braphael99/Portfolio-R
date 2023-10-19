@@ -1,0 +1,95 @@
+```{r}
+wc <- tribble(
+  ~name, ~year, ~hits, ~ outs,
+  "Justice", 95, 104, 307,
+  "Jeter", 95, 12, 36,
+  "Justice", 96, 45, 95,
+  "Jeter", 96, 183, 399
+)
+```
+
+```{r}
+wc %>%
+  filter(name == "Justice") %>%
+  summarize(average = 100 * sum(hits) / ((sum(hits) + sum(outs))))
+
+```
+
+```{r}
+options(dplyr.summarise.inform = FALSE)
+wc %>%
+  filter(name == "Justice") %>%
+  summarize(at_bats = sum(hits) + sum(outs),
+            average = 1000 * sum(hits) / at_bats)
+
+```
+```{r}
+wc %>%
+  group_by(name) %>%
+  summarize(at_bats = sum(hits) + sum(outs),
+            average = 1000 * sum(hits) / at_bats)
+
+```
+
+```{r}
+wc %>%
+    group_by(name) %>%
+    summarize(at_bats = sum(hits) + sum(outs),
+              average = 1000 * sum(hits) / at_bats) %>%
+    ggplot(aes(x = name, y = average)) +
+      geom_col()
+
+```
+```{r}
+wc %>%
+  group_by(year,name) %>%
+  summarize(at_bats = sum(hits) + sum(outs),
+            average = 1000 * sum(hits) / at_bats)
+
+
+```
+
+```{r}
+wc %>%
+  group_by(year,name) %>%
+  summarize(at_bats = sum(hits) + sum(outs),
+            average = 1000 * sum(hits) / at_bats) %>%
+  ggplot(aes(x = year, y = average)) +
+     geom_col(aes(fill=name), 
+              position="dodge")
+
+```
+
+```{r}
+wc %>%
+  group_by(year,name) %>%
+  summarize(at_bats = sum(hits) + sum(outs),
+            average = 1000 * sum(hits) / at_bats) %>%
+  mutate(year = factor(year)) %>%
+  ggplot(aes(x = average, y = year)) +
+     geom_col(aes(fill=name), 
+              position="dodge")
+
+```
+
+```{r}
+wc %>%
+  group_by(year,name) %>%
+  summarize(at_bats = sum(hits) + sum(outs),
+            average = 1000 * sum(hits) / at_bats) %>%
+  ggplot(aes(x = name, y = average)) + 
+     geom_point() + 
+     facet_wrap(~year)
+
+```
+```{r}
+wc %>%
+  group_by(year,name) %>%
+  summarize(at_bats = sum(hits) + sum(outs),
+            average = 1000 * sum(hits) / at_bats) %>%
+  ggplot(aes(x = name, y = average)) + 
+     geom_point(aes(size=at_bats)) + 
+     facet_wrap(~year)
+
+```
+

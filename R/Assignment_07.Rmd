@@ -1,0 +1,139 @@
+Problem 1
+```{r}
+weekdays <- c("Tuesday", "Wednesday", "Tuesday", "Friday", "Monday",  
+                "Monday", "Tuesday", "Tuesday", "Wednesday", "Friday",
+                      "Friday", "Friday", "Tuesday", "Wednesday", "Tuesday",  
+                      "Monday", "Monday", "Friday", "Thursday", "Friday", 
+                "Monday", "Wednesday", "Friday", "Thursday", "Friday",  
+                "Thursday", "Tuesday", "Friday", "Tuesday", "Monday")
+
+table(weekdays)
+```
+Problem 2
+```{r}
+weekdaysF <- factor(weekdays, 
+                    levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday"))
+
+table(weekdaysF)
+```
+Problem 3
+```{r}
+levels(weekdaysF)
+```
+Problem 4
+```{r}
+levels(weekdaysF) <- c("Mon","Tue","Wed","Thu","Fri")
+
+table(weekdaysF)
+```
+Problem 5
+```{r}
+summer_months <- c("June", "July", "August")
+```
+
+Problem 6
+```{r}
+
+summer_data <- sample(summer_months, 20, replace = TRUE)
+summer_data
+```
+Problem 7
+```{r}
+summer_dataF <- factor(summer_data,
+                       levels = c("June", "July", "August"))
+
+table(summer_dataF)
+```
+Problem 9
+```{r}
+major <- c(1,3,2,2,1,3,1,1)
+
+majorF <- factor(major, levels = c(1, 2, 3))
+
+table(majorF)
+```
+Problem 10
+```{r}
+levels(majorF) <- c("Math", "Chemistry", "Physics")
+
+table(majorF)
+```
+Problem 11
+```{r}
+students <- data.frame(
+      majors = c(1,3,2,2),    #1 math, 2 chemistry, 3 physics,
+      zip    = c(53140, 53143, 53140, 53141),
+      color  = c("red", "blue", "green", "red"),
+      gender = c("f","m","f","f")
+)
+
+students$majors <- factor(students$majors, levels = c(1, 2, 3))
+
+print(students)
+```
+Problem 12
+```{r}
+levels(students$majors) <- c("Math", "Chemistry", "Physics")
+```
+
+Problem 13
+```{r}
+students$color <- factor(students$color)
+
+table(students$color)
+```
+Problem 14
+```{r}
+students$color <- factor(students$color, levels = c("Red", "Green", "Blue"))
+
+table(students$color)
+```
+Problem 16
+```{r}
+students <- data.frame(
+      majors = c(1,3,2,2),    #1 math, 2 chemistry, 3 physics,
+      zip    = c(53140, 53143, 53140, 53141),
+      color  = c("red", "blue", "green", "red"),
+      gender = c("f","m","f","f")
+)
+students$majors <- factor(students$majors)
+levels(students$majors) <- c("math","chemistry", "physics")
+students$color <- factor(students$color, levels = c("red","green","blue"))
+students$gender <- factor(students$gender)
+levels(students$gender) <- c("Female","Male")
+students$zip <- NULL
+print(students)
+
+
+levels(students$color) <- c("Red", "Green", "Blue")
+barplot(table(students$color))
+```
+
+Problem 17
+```{r}
+students$gender <- factor(students$gender, levels = c("Male", "Female"))
+barplot(table(students$gender))
+```
+Problem 18
+```{r}
+levels(students$gender) <- c("M", "F")
+barplot(table(students$gender))
+```
+
+Problem 19
+```{r}
+#draw a size 24 random sample from 1 to 4
+my_data = sample(1:4, 24, replace=T)
+
+#Place the next two plots side by side:
+par(mfrow=c(1,2))
+	
+barplot(my_data)
+barplot(table(my_data))
+
+```
+
+Problem 20
+```{r}
+
+```

@@ -1,0 +1,45 @@
+```{r}
+Pet_Tibble <- tibble(
+  Pet  = c(4,5,6),
+  Freq = c(2,3,1)
+)
+
+ggplot(data = Pet_Tibble,
+       aes(x = Pet,
+           y = Freq)) +
+   geom_col()
+
+```
+
+```{r}
+wc <- A17_Small_Markets
+
+wc1 <- group_by(wc, Country) %>%
+       filter(max(GDP) < 250)
+wc1
+```
+
+
+```{r}
+ungroup(wc1) %>%
+summarize(Smallest  = min(GDP),
+          Med_GDP = median(GDP))
+
+```
+
+```{r}
+group_by(wc1, Year) %>%
+summarize(Mean_GDP = median(GDP))
+
+```
+
+```{r}
+group_by(wc1, Country) %>%
+arrange(Country, Year) %>%
+summarize(Percent_Change = (last(GDP) - first(GDP)) / first(GDP)) %>% 
+filter(Percent_Change > 0) %>%
+ggplot(aes(x = Percent_Change, y = Country)) +
+  geom_col()
+
+```
+

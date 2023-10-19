@@ -1,0 +1,70 @@
+Problem 1
+```{r}
+df <- mtcars
+df <- df[c(-5,-6,-7,-8,-10)]
+print(head(df))
+
+```
+
+Problem 2
+```{r}
+df$val1 <- df$carb + df$am
+```
+
+Problem 3
+```{r}
+df$val2 <- (3 * df$carb) + (df$am * 10)
+```
+
+Problem 4
+```{r}
+df$val3 <- (df$carb) + (2 * df$cyl) + (df$am * 10 + 10) 
+```
+
+Problem 5
+```{r}
+hist(df$hp,
+     main = "Distribution of HP",
+     xlab = "Horse Power",
+     ylab = "Number of Cars")
+```
+Problem 6
+```{r}
+hist(df$disp,
+     main = "Distribution of Displacement",
+     xlab = "Cubic Inches",
+     ylab = "Number of Vehicles")
+```
+Problem 7
+```{r}
+boxplot(df$hp,
+     main = "Distribution of HP",
+     ylab = "Horse Power")
+```
+
+Problem 8
+```{r}
+boxplot(df$disp,
+     main = "Displacements in mtcars",
+     ylab = "Horse Power")
+```
+
+Problem 9
+```{r}
+boxplot(list(Automatic = df$hp[ df$am == 0 ], 
+             Manual    = df$hp[ df$am == 1 ]),
+        main="Horse Power By Transmission Type",
+        ylab="Horse Power")
+
+```
+Problem 10
+```{r}
+v <- 1:4
+```
+
+Problem 11
+```{r}
+v[5] <- 5
+
+v
+```

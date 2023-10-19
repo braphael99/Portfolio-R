@@ -1,0 +1,23 @@
+```{r}
+sw <- A29_Star_Wars_Colors
+```
+
+```{r}
+write_csv(sw, "sw.csv")
+```
+
+```{r}
+sw <- sw_sw
+```
+
+```{r}
+sw %>%
+  count(skin_color)
+```
+
+```{r}
+sw %>%
+  ggplot(aes(y = fct_infreq(skin_color))) +
+    geom_bar()
+```
+

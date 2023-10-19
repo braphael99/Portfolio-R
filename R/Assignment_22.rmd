@@ -1,0 +1,128 @@
+Problem 1
+```{r}
+data(faithful)      #reset the original data frame faithful
+df <- data.frame(   #create a new working data frame df with 2 variables
+  wait = faithful$waiting,
+  dur  = round(faithful$eruptions*60)
+)
+
+WAIT_CUT <- 68.5
+DUR_CUT  <- 192
+df$size <- ifelse(df$wait<WAIT_CUT & df$dur < DUR_CUT, "small",
+           ifelse(df$wait>WAIT_CUT & df$dur > DUR_CUT, "big",
+                  "unclear"))
+df$size <- factor(df$size, levels=c("small","unclear","big"))
+
+```
+
+Problem 3
+```{r}
+plot(df$wait, df$dur, col=1:3)
+```
+Problem 4
+```{r}
+plot(df$wait, df$dur, col=df$size)
+text(df$wait, df$dur, 
+     labels=rownames(df),
+     pos=1   #labels below point
+)
+
+```
+Problem 5
+```{r}
+plot(df$wait, df$dur, col=df$size,
+     xlim = c(63,72),
+     ylim = c(140, 240)
+     )
+text(df$wait, df$dur, 
+     labels=rownames(df),
+     pos=2
+)
+```
+Problem 6
+```{r}
+plot(df$wait, df$dur, col=df$size
+     )
+segments(df$wait[rownames(df)=="174"], df$dur[rownames(df)=="174"], df$wait[rownames(df)=="155"], df$dur[rownames(df)=="155"]
+      )
+points(mean(c(df$wait[rownames(df)=="174"], df$wait[rownames(df)=="155"])), mean(c(df$dur[rownames(df)=="174"], df$dur[rownames(df)=="155"])),
+       pch = 16,
+       col = "blue"
+       )
+```
+Problem 7
+```{r}
+plot(df$wait, df$dur, col=df$size
+     )
+segments(df$wait[rownames(df)=="174"], df$dur[rownames(df)=="174"], df$wait[rownames(df)=="155"], df$dur[rownames(df)=="155"]
+      )
+segments(62,300,78,100)
+points(mean(c(df$wait[rownames(df)=="174"], df$wait[rownames(df)=="155"])), mean(c(df$dur[rownames(df)=="174"], df$dur[rownames(df)=="155"])),
+       pch = 16,
+       col = "blue"
+       )
+```
+Problem 11
+```{r}
+colors <- ifelse(df$dur > 1075-12.5*df$wait, "green", "black")
+```
+
+Problem 13
+```{r}
+colors <- ifelse(df$dur > 1075-12.5*df$wait, "green", "black")
+plot(df$wait, df$dur, 
+     col=colors,
+     main = "Old Faithful's Two Modes",
+     ylab = "Eruption Duration (seconds)",
+     xlab = "Waiting Time (minutes)",
+     las = 1
+     )
+```
+Problem 14
+```{r}
+waitVec <- runif(300,40,100)
+```
+
+Problem 15
+```{r}
+durVec <- ifelse(waitVec < WAIT_CUT, runif(300,100,260), runif(300,150,330))
+```
+
+Problem 16
+```{r}
+colorVec <- ifelse(durVec > 1075-12.5*waitVec, "green","black")
+```
+
+Problem 17
+```{r}
+waitVec = runif(300,40,100)
+durVec  = ifelse(waitVec < WAIT_CUT, runif(300,100,260),runif(300,150,330))
+colorVec = ifelse(durVec > 1075-12.5*waitVec, "green","black")
+
+plot(waitVec, durVec,
+     col = colorVec,
+     main = "Classifications for Simulated Geyser",
+     ylab = "Eruption Duration (sec)",
+     xlab = "Waiting Time (min)",
+     las = 1
+)
+legend(legend = c("small", "big"),
+       "topleft",
+       horiz = T,
+       fill = c("black", "green")
+
+)
+segments(62,300,78,100, col="red")
+
+```
+Problem 18
+```{r}
+id <- df$wait*1000 + df$dur
+```
+
+Problem 20
+```{r}
+id <- df$wait*1000 + df$dur
+print(272 - length(unique(id)))
+
+```

@@ -1,0 +1,197 @@
+Assignment Setup
+```{r}
+df <- data.frame(
+    x1 = c(10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5),
+    y1 = c(8.04, 6.95,  7.58, 8.81, 8.33, 9.96, 7.24, 4.26,10.84, 4.82, 5.68),
+    x2 = c(10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5),
+    y2 = c(9.14, 8.14,  8.74, 8.77, 9.26, 8.1, 6.13, 3.1,  9.13, 7.26, 4.74),
+    x3 = c(10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5),
+    y3 = c(7.46, 6.77, 12.74, 7.11, 7.81, 8.84, 6.08, 5.39, 8.15, 6.42, 5.73),
+    x4 = c(8, 8, 8, 8, 8, 8, 8, 19, 8, 8, 8),
+    y4 = c(6.58, 5.76,  7.71, 8.84, 8.47, 7.04, 5.25, 12.5, 5.56, 7.91, 6.89))
+
+```
+Problem 1
+```{r}
+colnames(df)
+rownames(df)
+```
+Problem 2
+```{r}
+rownames(df) <- paste("Row", 1:11)
+rownames(df)
+```
+Problem 3
+```{r}
+sapply(df, mean)
+```
+Problem 4
+```{r}
+sapply(df, sd)
+```
+Problem 5
+```{r}
+stats <- rbind(sapply(df, mean), sapply(df, sd))
+rownames(stats)[1:2] <- c("means", "stdevs")
+round(stats, 3)
+```
+Problem 6
+```{r}
+round(
+  rbind(
+   means    = sapply(df, mean),
+   stdevs   = sapply(df, sd)
+  ),3)
+
+```
+Problem 8
+```{r}
+cor(df$x1, df$y1)
+cor(df$x2, df$y2)
+cor(df$x3, df$y3)
+cor(df$x4, df$y4)
+```
+Problem 10
+```{r}
+plot(df$x1, df$y1)
+```
+Problem 12
+```{r}
+model1 <- lm(df$y1 ~ df$x1)
+model1
+```
+Problem 15
+```{r}
+model2 <- lm(df$x2 ~ df$y2)
+model3 <- lm(df$x3 ~ df$y3)
+model4 <- lm(df$x4 ~ df$y4)
+
+model2
+
+model3
+
+model4
+```
+Problem 16
+```{r}
+plot(df$x1, df$y1,
+     main = "",
+     ylab = "y1",
+     xlab = "x1",
+     xaxt = "n",
+     yaxt = "n"
+     )
+axis(3,
+     at = c(4, 6, 8, 10, 12, 14)
+     )
+axis(4,
+     at = c(5, 7, 9, 11),
+     las = 1
+     )
+abline(model1)
+```
+Problem 17
+```{r}
+#pdf(file = "fig_anscombe_R.pdf", width = 7.0, height = 7.0)
+
+par(mfrow=c(2,2))
+#You need to provide code for the next four lines here:
+  #scatter plot of x1 and y1 in upper-left
+plot(df$x1, df$y1,
+     main = "",
+     ylab = "y1",
+     xlab = "x1",
+     xaxt = "n",
+     yaxt = "n"
+     )
+axis(3,
+     at = c(4, 6, 8, 10, 12, 14)
+     )
+axis(4,
+     at = c(5, 7, 9, 11),
+     las = 1
+     )
+abline(model1)
+  #scatter plot of x2 and y2 in upper-right
+plot(df$x2, df$y2,
+     main = "",
+     ylab = "y2",
+     xlab = "x2",
+     xaxt = "n",
+     yaxt = "n"
+     )
+axis(3,
+     at = c(4, 6, 8, 10, 12, 14)
+     )
+axis(4,
+     at = c(1, 3, 5, 7, 9, 11),
+     las = 1
+     )
+abline(model2)
+  #scatter plot of x3 and y3 in lower-left
+plot(df$x3, df$y3,
+     main = "",
+     ylab = "y3",
+     xlab = "x3",
+     xaxt = "n",
+     yaxt = "n"
+     )
+axis(3,
+     at = c(4, 6, 8, 10, 12, 14)
+     )
+axis(4,
+     at = c(5, 7, 9, 11, 13),
+     las = 1
+     )
+abline(model3)
+  #scatter plot of x4 and y4 in lower-right
+plot(df$x4, df$y4,
+     main = "",
+     ylab = "y4",
+     xlab = "x4",
+     xaxt = "n",
+     yaxt = "n"
+     )
+axis(3,
+     at = c(4, 6, 8, 10, 12, 14, 16, 18, 20)
+     )
+axis(4,
+     at = c(5, 7, 9, 11),
+     las = 1
+     )
+abline(model4)
+
+#Stop sending graphical output to the pdf file:
+#dev.off()
+
+```
+Problem 19
+```{r}
+#pdf(file = "fig_anscombe2_R.pdf", width = 7.0, height = 7.0)
+
+par(mfrow=c(2,2))
+#You need to provide code for the next four lines here:
+  #scatter plot of x1 and y1 in upper-left
+plot(df$x1, df$y1, xlab="x1", ylab="y1", main="Set I",
+     xlim=c(2,20), ylim=c(2,14), pch = 19, col = "darkblue",
+     cex = 1.5, las = 1)
+
+  #scatter plot of x2 and y2 in upper-right
+plot(df$x2, df$y2, xlab="x2", ylab="y2", main="Set J",
+     xlim=c(2,20), ylim=c(2,14), pch = 19, col = "darkblue",
+     cex = 1.5, las = 1)
+
+  #scatter plot of x3 and y3 in lower-left
+plot(df$x3, df$y3, xlab="x3", ylab="y3", main="Set K",
+     xlim=c(2,20), ylim=c(2,14), pch = 19, col = "darkblue",
+     cex = 1.5, las = 1)
+
+  #scatter plot of x4 and y4 in lower-right
+plot(df$x4, df$y4, xlab="x4", ylab="y4", main="Set L",
+     xlim=c(2,20), ylim=c(2,14), pch = 19, col = "darkblue",
+     cex = 5, las = 1)
+
+
+#Stop sending graphical output to the pdf file:
+#dev.off()
+```

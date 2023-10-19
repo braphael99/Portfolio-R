@@ -1,0 +1,59 @@
+```{r}
+options(dplyr.summarise.inform = FALSE)
+```
+
+```{r}
+A26_Use_of_Force  %>% 
+  select(SubjectAge, Tactic) %>% 
+  filter(str_detect(Tactic, "handcuffing")) -> cuffs
+
+```
+
+```{r}
+cuffs %>% 
+  filter(SubjectAge != "0-12") %>%
+  ggplot(aes(x = SubjectAge)) +
+     geom_bar()
+
+```
+
+```{r}
+cuffs %>% 
+  count(SubjectAge, Tactic, sort = TRUE) %>% rename(Freq = n)
+
+```
+
+```{r}
+cuffs %>% 
+  filter(SubjectAge != "0-12") %>% 
+  ggplot(aes(x = SubjectAge)) +
+     geom_bar(aes(fill = Tactic), position = "dodge")
+
+```
+
+```{r}
+cuffs %>% 
+  filter(SubjectAge != "0-12") %>% 
+  count(SubjectAge, Tactic, name = "Freq") %>% 
+  pivot_wider(names_from = Tactic, values_from = Freq) %>% 
+  summarize(SubjectAge, `Compliant handcuffing`, `Non-compliant handcuffing`,
+            TotalHandcuffs = `Compliant handcuffing` + `Non-compliant handcuffing`,
+            PercentCompliant = 100 * `Compliant handcuffing` / TotalHandcuffs) %>%
+  mutate(PercentCompliant = round(PercentCompliant))
+
+```
+
+```{r}
+cuffs %>% 
+  filter(SubjectAge != "0-12") %>% 
+  count(SubjectAge, Tactic, name = "Freq") %>% 
+  pivot_wider(names_from = Tactic, values_from = Freq) %>% 
+  summarize(SubjectAge, `Compliant handcuffing`, `Non-compliant handcuffing`,
+            TotalHandcuffs = `Compliant handcuffing` + `Non-compliant handcuffing`,
+            PercentCompliant = 100 * `Compliant handcuffing` / TotalHandcuffs) %>%
+  mutate(PercentCompliant = round(PercentCompliant)) %>%
+  ggplot(aes(SubjectAge, PercentCompliant)) +
+     geom_col()
+
+```
+

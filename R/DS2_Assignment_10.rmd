@@ -1,0 +1,38 @@
+Problem 1
+```{r}
+
+```
+
+Data Pipeline
+```{r}
+wc <- A10_Pokemon
+wc1 <- select (wc, - japanese_name, - (against_bug:against_water))
+wc2 <- rename (wc1, special_attack = sp_attack,
+               special_defense = sp_defense,
+               percent_male = perc_male)
+wc3 <- mutate(wc2, type1 = factor(type1),
+              type2 = factor(type2),
+              generation = factor(generation),
+              is_legendary = factor(is_legendary))
+wc <- wc3
+```
+
+Factor Plot
+```{r}
+ggplot(data = wc,
+       aes(y = type1)) +
+   geom_bar()
+
+ggplot(data = wc,
+       aes(y = fct_infreq(type1))) +
+  geom_bar()
+
+ggplot(data = wc,
+          aes(y = fct_rev(fct_infreq(type2)))) +
+  geom_bar(stat = "count")
+
+ggplot(data = wc,
+          aes(x = fct_infreq(generation))) +
+  geom_bar()
+
+```

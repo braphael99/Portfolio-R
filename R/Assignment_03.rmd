@@ -1,0 +1,77 @@
+Problem 1
+```{r}
+round(mtcars$wt, 2)
+```
+Problem 2
+```{r}
+1000 * round(mtcars$wt, 1)
+```
+Problem 3
+```{r}
+ sum(mtcars$mpg) / length(mtcars$mpg)
+```
+Problem 5
+```{r}
+sum(mtcars$am)
+```
+Problem 6
+```{r}
+mtcars[1]
+```
+Problem 7
+```{r}
+length(mtcars)
+```
+Problem 8
+```{r}
+nrow(mtcars)
+```
+Problem 9
+```{r}
+df <- mtcars
+```
+Problem 10
+```{r}
+sort(mtcars$qsec, decreasing=T)
+```
+Problem 11
+```{r}
+
+```
+Problem 13
+```{r}
+
+sqrt(sum((mtcars$hp - mean(mtcars$hp)) ^ 2) / (length(mtcars$hp) - 1))
+
+```
+Problem 14
+```{r}
+s <- "carthage"
+substr(s,1,3)
+
+```
+Problem 15
+```{r}
+s <- "carthage"
+substr(s,1,3)
+s
+```
+Problem 16
+```{r}
+s <- "doghouse"
+substr(s,1,3) <- "cat"
+s
+
+```
+Problem 17
+```{r}
+s <- "doghouse"
+substr(s,1,15)
+```
+Problem 18
+```{r}
+word <- "abcdefgh"
+new_word <- paste(substr(word,5,8), substr(word, 1,4), sep="")
+new_word
+```
+

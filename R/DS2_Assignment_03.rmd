@@ -1,0 +1,35 @@
+Problem 4
+```{r}
+wc <- A03_Letters
+
+pivot_longer(data = wc,                  
+             cols = Red:Blue,        
+             names_to = "Color", 
+             values_to = "Letter"           
+             )       
+```
+Problem 6
+```{r}
+wc <- A03_Virginia
+
+pivot_longer(data = wc,
+             cols = 2:5,
+             names_to = c("Type","Gender"),
+             names_sep = "_",
+             values_to = "Rate"
+)
+
+```
+
+Problem 7
+```{r}
+wc <- A03_Ages
+
+pivot_longer(data = wc,
+             cols = 2:10,
+             names_to = c("State", "Gender"),
+             names_sep = 2,
+             values_to = "Percent"
+)
+```
+

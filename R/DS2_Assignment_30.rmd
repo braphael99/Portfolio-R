@@ -1,0 +1,53 @@
+```{r}
+sWars <- A30_Star_Wars
+```
+
+```{r}
+sWars %>% count(name) %>% filter(n >= 2)
+```
+
+```{r}
+filter(sWars, !(name == "Zam Wesell" & species == "Human"))
+```
+
+```{r}
+sWars %>% 
+  count(species, name = "freq") %>% 
+  mutate(singleton = (freq == 1)) %>% 
+  count(singleton)
+
+```
+
+```{r}
+pivot_longer(sWars,
+             cols = film1:film6,
+             names_to = "film_number",
+             names_prefix = "film",
+             values_to = "in_film")
+```
+
+```{r}
+sWars %>%
+  pivot_longer(cols = film1:film6,
+             names_to = "film_number",
+             names_prefix = "film",
+             values_to = "in_film") %>%
+  filter(in_film == 1) %>%
+  count(film_number, name = "num_characters")
+  
+  
+```
+```{r}
+sWars %>% mutate(total_films = film1 + film2 + film3 + film4 + film5 + film6) %>% 
+  ggplot(aes(x = total_films)) + geom_bar()
+
+```
+
+```{r}
+sWars %>% 
+   mutate(total_films = film1 + film2 + film3 + film4 + film5 + film6) %>% 
+   filter(total_films == 0) %>% 
+   select(name) 
+
+```
+

@@ -1,0 +1,152 @@
+2Assignment Setup
+```{r}
+tg <- ToothGrowth
+str(tg)	#See the data frame's structure
+```
+
+Problem 1
+```{r}
+tg$dose <- factor(tg$dose)
+```
+
+Problem 3
+```{r}
+tab <- tapply(tg$len, tg$supp, mean)
+
+barplot(tab,
+        main = "Tooth Growth by Supplement",
+        ylab = "Mean Length")
+```
+Problem 4
+```{r}
+tab <- tapply(tg$len, tg$dose, mean)
+
+barplot(tab,
+        main = "Tooth Growth by Dosage",
+        ylab = "Mean Length")
+```
+Problem 5
+```{r}
+tab <- tapply(tg$len, list(tg$dose,tg$supp), mean)
+
+barplot(tab,
+        main = "Growth for each Dosage Level by Supplement Type",
+        ylab = "Mean Length",
+        beside = T)
+```
+Problem 6
+```{r}
+tab <- tapply(tg$len, list(tg$dose,tg$supp), mean)
+
+barplot(tab,
+        main = "Growth for each Dosage Level by Supplement Type",
+        ylab = "Mean Length",
+        beside = T,
+        col = c("red", "green", "blue")
+        )
+
+legend(
+  legend =c("0.5", "1.0", "2.0"),
+  fill = c("red", "green", "blue"),
+  "topleft", inset=c(0,0),
+   title="Dosage",
+   horiz=F
+)
+```
+Problem 7
+```{r}
+tab <- tapply(tg$len, list(tg$supp,tg$dose), mean)
+
+barplot(tab,
+        main = "Growth for each Supplement Type by Dosage Level",
+        ylab = "Mean Length",
+        beside = T)
+```
+Problem 8
+```{r}
+tab <- tapply(tg$len, list(tg$supp,tg$dose), mean)
+
+barplot(tab,
+        main = "Growth for each Supplement Type by Dosage Level",
+        ylab = "Mean Length",
+        beside = T,
+        col = c("black", "white")
+        )
+
+legend(
+  legend =c("OJ", "VC"),
+  fill = c("black", "white"),
+  "topleft", inset=c(.1,.1),
+   title="Type",
+   horiz=F
+)
+```
+Problem 12
+```{r}
+boxplot(tg$len~tg$supp,
+        las=1,   #Makes the y-axis numbers horizontal
+        main = "Comparison by Supplement Type",
+        ylab = "Tooth Growth",
+        xlab = "Supplement Type"
+)
+
+```
+Problem 13
+```{r}
+boxplot(tg$len~tg$dose,
+        las=1,   #Makes the y-axis numbers horizontal
+        main = "Comparison by Dosage Level",
+        ylab = "Tooth Growth",
+        xlab = "Dosage Level"
+)
+```
+Problem 14
+```{r}
+df1 <- tg[tg$dose==0.5, ] #the blank second index means "all columns"
+str(df1)
+
+```
+Problem 15
+```{r}
+df2 <- tg[tg$dose==1.0, ] #the blank second index means "all columns"
+str(df2)
+df3 <- tg[tg$dose==2.0, ] #the blank second index means "all columns"
+str(df3)
+
+```
+Problem 16
+```{r}
+boxplot(df1$len~df1$supp,
+        las=1,
+        main = "Comparison by Supplement Type",
+        ylab = "Tooth Growth",
+        xlab = "Supplement Type"
+)
+```
+Problem 17
+```{r}
+par(mfrow=c(1,3)) #Matrix frame in a 1x3 row grid
+#add your three boxplots here:
+boxplot(df1$len~df1$supp,
+        las = 1,
+        main = "Low Dose",
+        ylab = "Growth",
+        xlab = "Supplement Type",
+        ylim = c(0,40)
+)
+boxplot(df2$len~df2$supp,
+        las = 1,
+        main = "Mid Dose",
+        ylab = "Growth",
+        xlab = "Supplement Type",
+        ylim = c(0,40)
+)
+boxplot(df3$len~df3$supp,
+        las = 1,
+        main = "High Dose",
+        ylab = "Growth",
+        xlab = "Supplement Type",
+        ylim = c(0,40)
+)
+```
+

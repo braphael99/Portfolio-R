@@ -1,0 +1,136 @@
+Problem 1
+```{r}
+data(faithful)        #reset the original data frame
+df <- data.frame(     #name for our modified data frame
+  wait = faithful$waiting,
+  dur  = round(faithful$eruptions*60)  #convert minutes to seconds
+)
+
+```
+
+Problem 2
+```{r}
+WAIT_CUT <- 68.5  #Cut-off for small vs big waiting-times in minutes
+DUR_CUT  <- 192   #Cut-off for small vs big eruption-durations in seconds
+
+df$size = ifelse(df$dur < DUR_CUT & df$wait < WAIT_CUT, "small",
+          ifelse(df$dur > DUR_CUT & df$wait > WAIT_CUT, "big",
+          "unclear"))
+df
+```
+Problem 3
+```{r}
+df$size <- factor(df$size, levels= c("small","unclear","big"))
+```
+Problem 4
+```{r}
+df$size
+```
+Problem 6
+```{r}
+colors <- c("blue","red","green")[df$size]
+
+colors
+```
+Problem 7
+```{r}
+c("dog","cat","pig")[c(1,3,2,1,2,1)]
+```
+Problem 8
+```{r}
+plot(df$wait, df$dur,
+     pch=c(16,3,17)[ df$size ]
+)
+
+```
+Problem 9
+```{r}
+plot(df$wait, df$dur,
+     col = c("blue","red","green")[ df$size ],
+     pch=c(16,3,17)[ df$size ]
+)
+legend(legend = c("small", "unclear", "large"),
+       pch = c(16,3,17),
+       col = c("blue", "red", "green"),
+       horiz = TRUE,
+       "topleft"
+)
+```
+Problem 10
+```{r}
+plot(c(1,4,8,2,5,3,6,7), 
+     type="s",
+) #the original plot is done
+
+#Now we can add another layer of points
+points(8:15, 
+       type="s", 
+       col="red"
+)
+
+```
+Problem 11
+```{r}
+plot(df$wait[1:20], 
+     type="s",
+     ylim = c(1, 300),
+     ylab = "",
+     main = "Oscillations of wait and dur"
+)
+points(df$dur[1:20], 
+       type="s"
+)
+```
+Problem 15
+```{r}
+df$wait_type <- rep("other",272)  #start with 272 "others" by default
+#Loop:
+for(i in 2:271){  #Loops through with i = 2, then again with i = 3, etc.
+  if(df$wait[i] < df$wait[i-1] & df$wait[i] < df$wait[i+1]){
+    df$wait_type[i]="valley"
+  }
+  if(df$wait[i] > df$wait[i-1] & df$wait[i] > df$wait[i+1]){
+    df$wait_type[i]="peak"
+  }
+}
+df$wait_type <- factor(df$wait_type)
+df$wait_type <- ordered(df$wait_type, c("valley","other","peak"))
+
+```
+
+Problem 17
+```{r}
+df$dur_type <- rep("other",272)
+
+for(i in 2:271){
+  if(df$dur[i] < df$dur[i-1] & df$dur[i] < df$dur[i+1]){
+    df$dur_type[i]="valley"
+  }
+  if(df$dur[i] > df$dur[i-1] & df$dur[i] > df$dur[i+1]){
+    df$dur_type[i]="peak"
+  }
+}
+df$dur_type <- factor(df$dur_type)
+df$dur_type <- ordered(df$dur_type, c("valley","other","peak"))
+
+```
+
+Problem 18
+```{r}
+plot(df$wait, df$dur,
+     col=c("blue","red","green")[df$wait_type],
+     pch=c(16,3,17)[df$dur_type]
+)
+legend(legend=levels(df$wait_type),
+       title="Wait",
+       fill=c("blue","red","green"),
+       "topleft",
+       horiz=T
+       )
+legend(legend=levels(df$dur_type),
+        title="Duration",
+        pch=c(16,3,17),
+        "bottomright",
+        horiz=T
+        )
+```

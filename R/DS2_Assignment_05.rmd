@@ -1,0 +1,72 @@
+problem 1
+```{r}
+wc  <- A05_Iris
+wc1 <- rename(wc, "Sepal_Length" = Sepal.Length,
+                  "Sepal_Width"  = Sepal.Width,
+                  "Petal_Length" = Petal.Length,
+                  "Petal_Width"  = Petal.Width)
+print(wc1)
+
+```
+
+problem 5
+```{r}
+wc  <- A05_Iris
+wc1 <- rename(wc, "Sepal_Length" = Sepal.Length, "Sepal_Width"  = Sepal.Width,
+                  "Petal_Length" = Petal.Length, "Petal_Width"  = Petal.Width)
+wc2 <- mutate(wc1, Sepal_Length = .393701 * Sepal_Length,
+                   Petal_Length = .393701 * Petal_Length,
+                   Sepal_Width  = .393701 * Sepal_Width ,
+                   Petal_Width  = .393701 * Petal_Width)
+
+```
+
+Problem 6
+```{r}
+wc  <- A05_Iris
+wc1 <- rename(wc, "Sepal_Length" = Sepal.Length, "Sepal_Width"  = Sepal.Width,
+                  "Petal_Length" = Petal.Length, "Petal_Width"  = Petal.Width)
+wc2 <- mutate(wc1, Sepal_Length = .393701 * Sepal_Length,
+                   Petal_Length = .393701 * Petal_Length,
+                   Sepal_Width  = .393701 * Sepal_Width ,
+                   Petal_Width  = .393701 * Petal_Width)
+wc3 <- mutate(wc2, Species = str_to_title(Species))
+
+```
+
+Problem 7
+```{r}
+ggplot(data = wc3,
+       aes(x = Petal_Length, y = Petal_Width))+
+  geom_point(aes(color = Species))
+```
+Problem 10
+```{r}
+ggplot(data = filter(wc3, Species == "Setosa" | Species == "Virginica"),
+       aes(x = Petal_Length, y = Petal_Width)) +
+  geom_point(aes(color =  Species), position = "jitter")
+
+```
+Problem 15
+```{r}
+ggplot(data = wc3,
+       aes(x = Species, y = Petal_Width)) + 
+  geom_boxplot()
+
+```
+
+Problem 16
+```{r}
+ggplot(data = filter(wc3, Species == "Versicolor" | Species == "Virginica"),
+       aes(x = Petal_Length, y = Species)) + 
+  geom_boxplot()
+```
+Problem 17
+```{r}
+ggplot(data = filter(wc3, Species != "Setosa"),
+       aes(x = Petal_Length, y = Species)) + 
+
+  geom_boxplot() +
+
+  geom_point(position = "jitter")
+```

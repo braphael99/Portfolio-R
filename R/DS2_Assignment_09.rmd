@@ -1,0 +1,32 @@
+Problem 1
+```{r}
+my_data <- tibble(
+   Amounts = c(1,2,3,4,5,6,8,10,12,14,16,18,      #Type A's
+               1,2,3,4,5,6,8,10,12,14,16,24,      #Type B's
+               1,2,3,4,5,6,8,10,12,14,16,26),     #Type C's
+
+   Type = c("A","A","A","A","A","A","A","A","A","A","A","A",
+            "B","B","B","B","B","B","B","B","B","B","B","B",
+            "C","C","C","C","C","C","C","C","C","C","C","C")
+)
+
+```
+
+Problem 11
+```{r}
+challenge <- tibble(
+   Credits = c(3,14,26,26,20,16,18,22,24,24,26,28,      #Type A's
+               12,14,26,26,20,16,18,22,24,24,26,28),     #Type C's
+
+   Class = c("P","P","P","P","P","P","P","P","P","P","P","P",
+            "Q","Q","Q","Q","Q","Q","Q","Q","Q","Q","Q","Q")
+)
+
+summary(challenge)
+```
+Problem 12
+```{r}
+ggplot(data = challenge,
+       aes(x = Credits, y = Class))+
+  geom_boxplot()
+```

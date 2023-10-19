@@ -1,0 +1,77 @@
+Problem 1
+```{r}
+mode(1)
+```
+Problem 2
+```{r}
+mode("Carthage College")
+```
+Problem 3
+```{r}
+mode(T)
+```
+Problem 4
+```{r}
+mode("TRUE")
+```
+Problem 5
+```{r}
+mode(mode(100))
+```
+Problem 6
+```{r}
+typeof(TRUE)
+```
+Problem 7
+```{r}
+typeof(12L)
+```
+Problem 9
+```{r}
+typeof(12L+12L)
+```
+Problem 10
+```{r}
+typeof(12L*12L)
+```
+Problem 11
+```{r}
+as.numeric("10") + as.numeric("20")
+```
+Problem 13
+```{r}
+10*11^2
+```
+problem 14
+```{r}
+"Divide 22 by 4"
+paste("The quotient is", 22 %/% 4)
+paste("The remainder is", 22 %% 4)
+
+```
+Problem 15 
+```{r}
+(10*11^2)%%10
+```
+Problem 16
+```{r}
+100/0
+```
+Problem 17
+COME BACK TO THIS ONE
+```{r}
+choose(20, 4)
+```
+Problem 18
+```{r}
+sqrt(256)
+```
+
+Problem 19
+```{r}
+factorial(5L)
+```
+Problem 20
+```{r}
+
+```

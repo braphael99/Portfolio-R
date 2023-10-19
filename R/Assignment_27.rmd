@@ -1,0 +1,147 @@
+Problem 1
+```{r}
+dodgers <- read.csv(file = "dodgers.csv")
+df <- data.frame(
+  Attendance  = dodgers$attend,
+  Bobblehead  = factor(dodgers$bobblehead),
+  Temperature = dodgers$temp,
+  ClearCloudy = factor(dodgers$skies),
+  DayNight    = factor(dodgers$day_night),
+  Fireworks   = factor(dodgers$fireworks)
+)
+
+df$DOW <- factor(dodgers$day_of_week,
+                 levels = c("Monday", "Tuesday", "Wednesday","Thursday",
+                            "Friday","Saturday","Sunday"))
+levels(df$DOW) <- c("Mon", "Tue", "Wed","Thu","Fri","Sat","Sun") #rename
+
+head(df)
+```
+
+Problem 2
+```{r}
+df$Month <- factor(dodgers$month, levels = c("APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT"))
+
+levels(df$Month) <- c("Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct")
+```
+
+Problem 4
+```{r}
+table(df$Month)
+```
+Problem 5
+```{r}
+table(df$Month, df$DOW)
+```
+Problem 7
+```{r}
+table(df$Bobblehead, df$Month)
+```
+Problem 8
+```{r}
+tab <- table(df$DOW, df$Month)
+
+barplot(tab,
+        main = "Games By Day for each Month",
+        horiz = T,
+        las = 1,
+        beside = T
+        )
+```
+Problem 10
+```{r}
+table(df$Month)[c("Jun", "Jul", "Aug", "Oct")]
+table(df$Month)[c(3:5, 7)]
+```
+
+Problem 11
+```{r}
+myTab <- table(df$DOW,df$Month)
+
+myTab["Mon","May"]
+myTab[c("Mon","Tue"),"May"]
+myTab["Mon", c("May","Jun")]
+myTab[1:5,-7]
+
+```
+Problem 12
+```{r}
+barplot(table(df$Month, df$DOW)[3:5, 3:5],
+        main = "Games by Summer Months for each of WTF",
+        ylab = "Count",
+        xlab = "",
+        las = 1,
+        beside = T
+        )
+
+```
+Problem 14
+```{r}
+rbind(
+  table(df$Month),
+  tapply(df$Attendance, df$Month, sum),
+  tapply(df$Attendance, df$Month, mean)
+)
+
+```
+
+Problem 15
+```{r}
+monTab <- rbind(
+  table(df$Month),
+  tapply(df$Attendance, df$Month, sum),
+  tapply(df$Attendance, df$Month, mean)
+)
+
+rownames(monTab) <- c("Count", "Sum", "Mean")
+round(monTab)
+
+```
+Problem 16
+```{r}
+bobbleTab <- rbind(
+  table(df$Bobblehead, df$Month),
+  table(df$Month),
+  tapply(df$Attendance, df$Month, median)
+)
+
+rownames(bobbleTab) <- c("Bobblehead Yes", "Bobblehead No", "Total", "Med Attend")
+round(bobbleTab[,3:5])
+```
+Problem 17
+```{r}
+boxplot(df$Attendance/1000 ~ df$Month,
+        ylab = "Attendance (in thousands)",
+        xlab = "",
+        col = "white",
+        yaxt = "n"
+        )
+axis(side = 2,
+     at = c(25, 35, 45, 55),
+     las = 1
+     )
+```
+Problem 18
+```{r}
+summerFilter <- (df$Month == "Jun" | df$Month == "Jul" | df$Month == "Aug")
+print(summerFilter)
+
+```
+Problem 19
+```{r}
+boxplot(df$Attendance[summerFilter]/1000 ~ df$Month[summerFilter],
+        ylab = "Attendance (in thousands)",
+        xlab="",
+        las = 1
+)
+
+```
+
+Problem 20
+```{r}
+boxplot(df$Attendance[summerFilter]/1000 ~ droplevels(df$Month[summerFilter]),
+        ylab = "Attendance (in thousands)",
+        xlab="",
+        las = 1
+)
+```

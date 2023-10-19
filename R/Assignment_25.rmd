@@ -1,0 +1,113 @@
+Assignment Setup
+```{r}
+dodgers <- read.csv(file = "dodgers.csv")
+```
+
+
+Problem 2
+```{r}
+head(dodgers[1:6])
+```
+
+Problem 3
+```{r}
+df <- data.frame(
+  Attendance = dodgers$attend
+  
+)
+```
+
+Problem 4
+```{r}
+df$Temperature <- dodgers$temp
+```
+
+Problem 5
+```{r}
+plot(df$Temperature, df$Attendance)
+```
+Problem 6
+```{r}
+df$ClearCloudy <- dodgers$skies
+
+class(dodgers$skies)
+```
+Problem 8
+```{r}
+df$ClearCloudy <- factor(df$ClearCloudy)
+```
+
+Problem 9
+```{r}
+plot(df$Temperature, df$Attendance,
+     col=df$ClearCloudy)
+
+```
+Problem 11
+```{r}
+plot(df$Temperature, df$Attendance,
+     col=ifelse(df$ClearCloudy == "Clear", "blue", "black"),
+     pch = ifelse(df$ClearCloudy == "Clear", 1, 19))
+```
+Problem 13
+```{r}
+df$DayNight <- dodgers$day_night
+```
+
+Problem 14
+```{r}
+plot(df$Temperature, df$Attendance,
+     col=ifelse(df$DayNight == "Day", "red", "black"),
+     pch = 19)
+```
+Problem 15
+```{r}
+library(lattice)
+
+xyplot(df$Attendance/1000 ~ df$Temperature | df$DayNight, 
+       layout = c(2,1),
+       xlab = "Temperature (Degrees Fahrenheit)",
+       ylab = "Attendance (thousands)"
+)
+
+```
+
+Problem 16
+```{r}
+xyplot(df$Attend/1000 ~ df$Temperature | df$ClearCloudy + df$DayNight, 
+       layout = c(2,2),
+       xlab = "Temperature (Degrees Fahrenheit)",
+       ylab = "Attendance (thousands)",
+       pch = 18
+)
+
+```
+Problem 19
+```{r}
+df$Fireworks <- dodgers$fireworks
+
+xyplot(df$Attendance/1000 ~ df$Temperature | df$DayNight + df$ClearCloudy, 
+       layout = c(2,2),
+       xlab = "Temperature (Degrees Fahrenheit)", 
+       ylab = "Attendance (thousands)",
+       
+       groups = df$Fireworks,
+       pch = c(16,17),
+       col = c("black","red"),
+       
+       #place key at top of plot:
+       key = list(space = "right",
+                  text   = list(c("No Fireworks","Fireworks")),
+                  points = list(pch = c(16,17), col = c("black","red"))
+             )
+)
+
+```
+Problem 20
+```{r}
+df$Bobblehead <- dodgers$bobblehead
+df$DayNight <- factor(df$DayNight)
+df$Fireworks <- factor(df$Fireworks)
+df$Bobblehead <- factor(df$Bobblehead)
+head(df)
+```

@@ -1,0 +1,29 @@
+Problem 3
+```{r}
+wc <- A07_MPG102
+
+```
+problem 4
+```{r}
+wc %>% count(Class)
+```
+
+Problem 5
+```{r}
+ggplot(data = wc,
+       aes(x = Class, y = MPG))+
+  geom_boxplot()
+```
+Problem 11
+```{r}
+wc1 <- mutate(wc, Year = factor(Year))
+```
+
+Problem 12
+```{r}
+ggplot(data = wc1,
+       aes(x = Year, y = MPG)) +
+   geom_boxplot() +
+   facet_wrap(~ Class)
+
+```

@@ -1,0 +1,37 @@
+```{r}
+#Suppress summarize() error messages
+options(dplyr.summarise.inform = FALSE)
+
+coots <- A22_Full_Cooties
+
+```
+
+```{r}
+arrange(coots, Year, Cases)
+```
+
+```{r}
+coots %>% 
+  ggplot(aes(x = Year, y = Cases, color = Country)) +
+     geom_point() +
+     geom_line()
+
+```
+
+```{r}
+coots %>%
+  filter(Year == 2020) %>%
+  ggplot(aes(x = Country, 
+             y = 100000* Cases / Population)) +
+     geom_col()
+
+```
+
+```{r}
+coots %>%
+  filter(Year == 2000) %>%
+  ggplot(aes(x = Country, 
+             y = Population)) +
+     geom_col()
+```
+

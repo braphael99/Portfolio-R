@@ -1,0 +1,23 @@
+Problem 1
+```{r}
+A16_Small_Markets     %>%
+   arrange(Year, GDP) ->   
+   wc
+
+wc
+```
+
+```{r}
+wc %>%
+  group_by(Country) %>%
+  filter(max(GDP) < 250)
+
+```
+
+```{r}
+wc %>%
+  group_by(Year) %>%
+  filter(median(GDP) > 200)
+
+```
+

@@ -1,0 +1,155 @@
+Assignment Setup
+```{r}
+
+```
+
+Problem 1
+```{r}
+data(iris)     #resets the data frame
+colors1 <- factor(iris$Species) 
+levels(colors1) <- c("red","green","blue")
+colors1
+
+```
+Problem 2
+```{r}
+plot(iris$Petal.Width ~ iris$Petal.Length,    #Width (y-axis) as a function of Length
+     col = colors1)				    #Using factor to set colors
+
+```
+Problem 3
+```{r}
+colors2 <- rep(c("red","green","blue"), each=50)
+colors2
+
+```
+Problem 4
+```{r}
+plot(iris$Petal.Width ~ iris$Petal.Length,
+     col = colors2)
+
+```
+Problem 5
+```{r}
+str(colors1)
+str(colors2)
+```
+Problem 6
+```{r}
+colors1==colors2
+```
+Problem 7
+```{r}
+animals <- c("dog","cat","pig")
+
+f1 <- factor(animals)
+str(f1)
+
+f2 <- factor(animals, levels=c("dog","cat","pig"))
+str(f2)
+
+```
+Problem 8
+```{r}
+colors3 <- factor(iris$Species)
+levels(colors3) <- c("red","green","blue")
+
+f <- factor(1:3)
+
+plot(iris$Petal.Width ~ iris$Petal.Length,
+     col = f+1)
+```
+
+Problem 10
+```{r}
+colors4 <- rep(c("AsphaltIsBlack","FireTrucksAreRed","GrapesAreGreen"), each=50)
+colors4 <- factor(colors4)
+plot(iris$Petal.Width ~ iris$Petal.Length,
+     col = colors4)
+
+```
+Problem 11
+```{r}
+colorVec <- (2:4)[iris$Species]
+colorVec
+
+```
+Problem 12
+```{r}
+plot(iris$Petal.Width ~ iris$Petal.Length,
+     col=colorVec)
+
+```
+Problem 13
+```{r}
+v <- 8
+animal <- ifelse(v < 10, "dog", "cat")
+print(animal)
+
+```
+Problem 14
+```{r}
+v <- c(8,12)
+animal <- ifelse(v < 10, "dog", "cat")
+print(animal)
+
+```
+Problem 15
+```{r}
+v <- c(8,12)
+animal <- ifelse(v < 10, c("dog1","dog2"), c("cat1","cat2"))
+print(animal)
+
+```
+Problem 16
+```{r}
+v <- c(8,12,16)
+animal <- ifelse(v < 10, c("dog1","dog2","dog3"), c("cat1","cat2","cat3"))
+print(animal)
+
+```
+
+Problem 17
+```{r}
+v <- c(8,12,16)
+animal <- ifelse(v < 10, c("dog1","dog2","dog3"), c("cat1","cat2"))
+print(animal)
+
+```
+
+Problem 18
+```{r}
+v <- c(8,12,16)
+animal <- ifelse(v < 10, c("dog1","dog2"), c("cat1","cat2"))
+print(animal)
+
+```
+
+Problem 19
+```{r}
+original <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+new <- ifelse(original=="Monday","Mon",
+       ifelse(original=="Tuesday","Tues",
+       ifelse(original=="Wednesday","Wed",
+       ifelse(original=="Thursday","Thurs",
+       ifelse(original=="Friday","Fri", original)))))
+           #NA is in case there are non-weekdays in the data
+		     #Think of it as a default if none of the previous tests were TRUE
+print(new)
+
+```
+
+Problem 20
+```{r}
+#How would we finish this statement:
+species_color <- 
+       ifelse(iris$Species=="setosa", 2,
+       ifelse(iris$Species=="versicolor", 3,
+       ifelse(iris$Species=="virginica", 7, iris$Species)))
+
+#Don't change this:
+plot( iris$Petal.Width ~ iris$Petal.Length, 
+      col=species_color
+)
+
+```

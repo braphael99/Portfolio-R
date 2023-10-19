@@ -1,0 +1,84 @@
+```{r}
+sched <- A34_Course_Schedule
+```
+
+```{r}
+sched <- mutate(sched, department = str_sub(course_code,1,3))
+```
+
+```{r}
+sched <- mutate(sched, department = str_to_upper(department))
+```
+
+```{r}
+sched <- mutate(sched, department = str_replace(department, "RLG","REL"))
+```
+
+```{r}
+sched <- mutate(sched, number = str_extract(course_code, "....$"))
+```
+
+```{r}
+sched <- mutate(sched, instructor = str_to_title(instructor))
+```
+
+```{r}
+sched <- mutate(sched, instructor = str_replace_all(instructor, "[.]", ""))
+
+```
+
+```{r}
+sched <- mutate(sched, instructor = str_replace(instructor, "^Prof", ""))
+
+```
+
+```{r}
+sched <- mutate(sched, instructor = str_trim(instructor))
+```
+
+```{r}
+sched <- mutate(sched, instructor = str_replace(instructor, "[ ][A-Z][ ]", " "))
+```
+
+```{r}
+sched <- mutate(sched, building = str_extract(location, "[^0-9]+"))
+```
+
+```{r}
+sched <- mutate(sched, building = str_to_upper(building))
+sched <- mutate(sched, building = str_replace(building, "HALL", ""))
+
+```
+
+```{r}
+sched <- mutate(sched, building = str_replace(building, "S.*", "SC"))
+sched <- mutate(sched, building = str_replace(building, "L.*", "LH"))
+sched <- mutate(sched, building = str_replace(building, "J.*", "JH"))
+
+```
+
+```{r}
+sched <- mutate(sched, building = str_trim(building))
+```
+
+```{r}
+sched <- mutate(sched, room = str_extract(location, "[0-9]+"))
+```
+
+```{r}
+sched <- mutate(sched, room = str_pad(room, width = 3, side ="left", "0"))
+```
+
+```{r}
+sched <- mutate(sched, instructor = str_to_title(instructor))
+```
+
+```{r}
+sched <- select(sched, Department = department,
+                       Course_Number = number,
+                       Instructor = instructor,
+                       Building = building,
+                       Room = room)
+
+```
+

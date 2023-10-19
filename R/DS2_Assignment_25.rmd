@@ -1,0 +1,46 @@
+```{r}
+police <- A25_Use_of_Force
+```
+
+
+```{r}
+police %>%
+   pivot_longer(cols = c(starts_with("Outcome: ")),
+                names_to = "Outcome",
+                names_prefix = "Outcome: ",
+                values_to = "Yes/No")
+
+```
+
+```{r}
+police %>%
+   pivot_longer(cols = c(starts_with("Outcome: ")),
+                names_to = "Outcome",
+                names_prefix = "Outcome: ",
+                values_to = "Yes/No") %>% 
+  filter(`Yes/No` == "Yes")
+
+```
+
+```{r}
+police %>%
+   pivot_longer(cols = c(starts_with("Outcome: ")),
+                names_to = "Outcome",
+                names_prefix = "Outcome: ",
+                values_to = "Yes/No") %>% 
+  filter(`Yes/No` == "Yes") %>% 
+  mutate(`Yes/No` = NULL)
+
+```
+
+```{r}
+police %>%
+   pivot_longer(cols = c(starts_with("Location: ")),
+                names_to = "Location",
+                names_prefix = "Location: ",
+                values_to = "Yes/No") %>% 
+  filter(`Yes/No` == "Yes") %>% 
+  mutate(`Yes/No` = NULL)
+
+```
+

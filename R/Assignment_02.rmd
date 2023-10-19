@@ -1,0 +1,84 @@
+Problem 2
+```{r}
+n <- 10
+
+a <- 1 / sqrt(5) * ((1 + sqrt(5)) / 2) ^ n - ((1 - sqrt(5)) / 2) ^ n
+
+```
+Problem 3
+COME BACK TO THIS
+```{r}
+w <- 5
+t <- 40
+
+a <- 91.4 - (10.45 + 6.69 * sqrt(w) - 0.447 * w) * (91.4 - t) / 22
+
+
+```
+Problem 4
+```{r}
+animals <- c("dog", "cat", "rat", "frog")
+```
+Problem 5
+```{r}
+length(animals)
+```
+Problem 6
+```{r}
+nchar("camera")
+```
+Problem 7
+```{r}
+4:4
+```
+Problem 8
+```{r}
+5:10
+(10-5) + 1
+```
+Problem 9
+```{r}
+sqrt( c(1,4,9,16))
+```
+Problem 10
+```{r}
+sqrt(1:100)
+```
+Problem 11
+```{r}
+1:10 * 1:10
+```
+
+Problem 12
+```{r}
+1:8 + 1:3
+```
+Problem 13
+```{r}
+2 * c(1,3,5)
+```
+Problem 14
+```{r}
+c(1:4, c(1,2,3,4), 1:6)
+```
+Problem 16
+COME BACK TO THIS
+```{r}
+v <- 1:4
+
+v[7]
+```
+Problem 17
+```{r}
+c(12,24,14,8) / c(3,8,7,4)
+```
+Problem 18
+```{r}
+0:11 %/% 3
+```
+
+Problem 20
+```{r}
+c("12", "dog")
+```
+

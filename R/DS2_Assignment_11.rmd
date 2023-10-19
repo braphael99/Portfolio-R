@@ -1,0 +1,92 @@
+Problem 1
+```{r}
+wc <- A11_Pokemon
+wc1 <- mutate(wc, type1 = factor(type1),
+              type2 = factor(type2),
+              generation = factor(generation),
+              is_legendary = factor(is_legendary))
+wc2 <- drop_na(wc1, weight_kg, height_m)
+wc <- wc2
+
+```
+
+Problem 2
+```{r}
+temp <- filter(wc1, 
+               is.na(weight_kg) == TRUE)
+count(temp, generation)
+
+```
+
+Problem 3
+```{r}
+ggplot(data = wc,
+       aes(x = generation, 
+           y = weight_kg))  +
+  geom_bar(stat="summary",      
+           fun = median)
+
+```
+Problem 7
+```{r}
+ggplot(data = wc,
+       aes(x = generation, 
+           y = weight_kg))  +
+  geom_boxplot()
+```
+Problem 11
+```{r}
+ggplot(data = wc,
+       aes(x = generation, 
+           y = height_m)) +
+  geom_bar(stat="summary",
+           fun = mean)
+```
+Problem 12
+```{r}
+ggplot(data = wc,
+       aes(x = generation, 
+           y = height_m))  +
+  geom_boxplot()
+```
+Problem 14
+```{r}
+ggplot(data = wc,
+       aes(y = fct_infreq(type1))) +
+  geom_bar(stat="count")
+
+```
+Problem 15
+```{r}
+ggplot(data = wc,
+       aes(y = type1,
+           x = weight_kg)) +
+  geom_bar(stat="summary",
+           fun = mean)
+```
+Problem 16
+```{r}
+ggplot(data = wc,
+       aes(y = type1,
+           x = height_m)) +
+  geom_bar(stat="summary",
+           fun = median)
+```
+Problem 17
+```{r}
+ggplot(data = wc,
+       aes(y = type1,
+           x = height_m)) +
+  geom_boxplot()
+```
+Problem 18
+```{r}
+ggplot(data = wc, 
+    aes(x = generation,
+        y = capture_rate)) +
+  geom_bar(stat="summary", 
+            fun = median, 
+            fill = "red") + 
+  geom_boxplot(width = .5)
+
+```

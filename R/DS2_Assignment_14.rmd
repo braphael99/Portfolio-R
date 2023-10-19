@@ -1,0 +1,47 @@
+Problem 1
+```{r}
+gdp <- A14_GDP
+wc1 <- rename(gdp, yr = year, pop = population)
+
+```
+```{r}
+rename(gdp, yr = year, pop = yr)
+```
+
+```{r}
+gdp %>% select(country, population)
+```
+```{r}
+gdp %>% select(-mil)
+```
+
+```{r}
+select(gdp, GDP, country, population)
+```
+```{r}
+filter(gdp, year == "2020")
+```
+
+```{r}
+mutate(gdp, troops = 1000 * mil)
+mutate(gdp, GDPPC = (1000000000000*GDP) / (1000000*population))
+```
+
+```{r}
+gdp %>% 
+   select(country, year, population) %>%  
+   arrange(year, population)
+
+```
+
+```{r}
+gdp %>% 
+   filter(year == 2020) %>%
+   mutate(GDPPC = 1000000*GDP / population ) %>%
+   select(country, GDPPC) %>%
+   arrange(GDPPC) %>%
+   ggplot(aes(x = country, y = GDPPC)) +
+      geom_col()
+
+```
+

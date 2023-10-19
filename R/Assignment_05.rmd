@@ -1,0 +1,109 @@
+Problem 2
+```{r}
+w <- 1:5
+
+(w[2:5] + w[5:2])/2 - mean(w[2:5])
+```
+Problem 4
+```{r}
+v <- 1:10
+
+v[c(1,-3)]
+```
+Problem 5
+```{r}
+
+v <- seq(2,10,3)
+
+print(v[ v > 5 ])
+
+```
+Problem 6
+```{r}
+v <- rep( c(1,3,6), each=3 )
+print(v[ v<2 | v>=6 ])
+
+```
+Problem 7
+```{r}
+v <- rep(c(1,3,6),3)
+print(v[ v<2 | v>=6 ])
+
+```
+Problem 9
+```{r}
+sd( mtcars$hp[mtcars$cyl == 4])
+
+```
+Problem 10
+```{r}
+median( mtcars$disp[mtcars$am == "manual" & mtcars$cyl == 4])
+```
+Problem 11
+```{r}
+numbers1 <- data.frame(
+  c(1,2,3),
+  c(4,5,6),
+  c(7,8,9)
+)
+
+numbers2 <- data.frame(
+  first = c(1,2,3),
+  second = c(4,5,6),
+  third = c(7,8,9)
+)
+```
+
+Problem 12
+```{r}
+names(numbers2)
+```
+Problem 13
+```{r}
+names(numbers2)[1:2] <- names(numbers2)[2:1]
+```
+
+Problem 15
+```{r}
+numvec = c(2,5,8,9,0,6,7,8,4,5,7,11)
+numvec[numvec > 7]
+numvec[numvec < 9 & numvec > 4]
+numvec[numvec < 3 | numvec > 9]
+
+subset(numvec, numvec > 7)
+subset(numvec, numvec < 9 & numvec > 4)
+subset(numvec, numvec < 3 | numvec > 9)
+
+```
+
+Problem 16
+```{r}
+length(c(1, 5:10))
+```
+
+Problem 17
+```{r}
+numbers2$second <- NULL
+```
+
+Problem 18
+```{r}
+max(mtcars$hp) - min(mtcars$hp)
+```
+Problem 19
+```{r}
+library(MASS)
+data(Cars93)
+
+mean((Cars93$MPG.highway - Cars93$MPG.city))
+
+mean(Cars93$MPG.highway) - mean(Cars93$MPG.city)
+
+```
+
+Problem 20
+```{r}
+paste("x",1:4,sep="")
+
+```
+

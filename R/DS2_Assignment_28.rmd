@@ -1,0 +1,7 @@
+```{r}
+veggies %>%
+  mutate(Color = factor(Color)) %>%
+  count(Vegetable, Color, name = "Freq", sort = TRUE, .drop = FALSE) %>%
+  filter(Vegetable == "pepper")
+```
+

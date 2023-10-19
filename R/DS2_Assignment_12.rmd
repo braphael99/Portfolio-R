@@ -1,0 +1,94 @@
+Problem 1
+```{r}
+wc <- A12_Pokemon
+wc1 <- select(wc,
+              name,
+              
+             #Categoricals
+              generation,
+              type = type1,
+              is_legendary,
+              
+             #Numericals
+              height = height_m,
+              weight = weight_kg,
+              speed,
+              attack,
+              defense,
+              happiness,
+              
+             #Other
+              abilities)
+
+wc2 <- mutate(wc1,
+              type = factor(type),
+              generation = factor(generation),
+              is_legendary = factor(is_legendary))
+
+
+wc3 <- drop_na(wc2, weight, height)
+
+wc <- wc3
+```
+
+Problem 2
+```{r}
+ggplot(wc,
+       aes(x = is_legendary, 
+           y = speed)) +
+   geom_boxplot()
+
+```
+Problem 6
+```{r}
+ggplot(wc,
+       aes(x = is_legendary, 
+           y = defense)) +
+   geom_boxplot()
+
+```
+Problem 8
+```{r}
+ggplot(wc,
+       aes(x = is_legendary, 
+           y = height)) +
+   geom_boxplot()
+```
+Problem 10
+```{r}
+ggplot(wc,
+       aes(x = is_legendary, 
+           y = weight)) +
+   geom_boxplot()
+```
+PRoblem 12
+```{r}
+ggplot(wc,
+       aes(x = is_legendary, 
+           y = attack)) +
+   geom_boxplot()
+```
+Problem 14
+```{r}
+ggplot(data = filter(wc, is_legendary == "yes"),
+       aes(x = generation)) +
+  geom_bar()
+
+```
+Problem 17
+```{r}
+ggplot(data = filter(wc, is_legendary == "yes"),
+       aes(y = type)) +
+   geom_bar()
+
+```
+```{r}
+stats <- summarize(group_by(wc, type),
+                   Prob1 = sum(is_legendary == "yes") /  69,
+                   Prob2 = sum(is_legendary == "no") / 712,
+                   Ratio = Prob1 / Prob2)
+ggplot(stats, aes(x = Ratio, y = type))+
+   geom_bar(stat = "identity")
+
+```
+

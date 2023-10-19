@@ -1,0 +1,50 @@
+```{r}
+A31_dictionary                     %>%
+rename(words = X1)                 %>%
+mutate(length = str_length(words)) ->
+dict
+
+```
+
+```{r}
+dict %>%
+  filter(length > 20)
+```
+
+```{r}
+dict %>% 
+  filter(str_detect(words, "cat") == TRUE)
+
+```
+
+```{r}
+dict %>% 
+  filter(str_detect(words, "cat") == TRUE & str_detect(words, "rat") == TRUE)
+```
+
+```{r}
+dict %>% filter(str_detect(words, "[carthge][carthge][carthge]"))
+
+```
+
+```{r}
+dict %>% filter(str_detect(words, "[^aeiouy][^aeiouy][^aeiouy][^aeiouy][^aeiouy]"))
+```
+
+```{r}
+dict %>% filter(str_detect(words, ".......s......."))
+```
+
+```{r}
+dict %>% filter(str_detect(words, "ing.*ing$"))
+```
+
+```{r}
+dict %>% filter(str_detect(words, "a.*e.*i.*o.*u.*"))
+```
+
+```{r}
+dict %>% filter(str_detect(words, "^me..s$"))
+
+```
+

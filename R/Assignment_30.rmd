@@ -1,0 +1,119 @@
+Assignment Setup
+```{r}
+strip <- function(txt){
+  txt <- toupper(txt)
+  charVec <- strsplit(txt, "")[[1]]
+  letterVec <- charVec["A" <= charVec & charVec <= "Z"]
+  return(paste(letterVec,collapse=""))
+}
+
+toNumbers <- function(plain){
+  letterVec <- strsplit(plain,"")[[1]]
+  letterVec <- factor(letterVec, levels=LETTERS)
+  return(as.numeric(letterVec))
+}
+
+```
+
+Problem 1
+```{r}
+shift <- function(nums, key){
+  nums <- nums + key
+  nums <- nums %% 26
+  nums <- ifelse(nums == 0, 26, nums)
+  return(nums)
+}
+
+```
+
+Problem 4
+```{r}
+secretMessage <- "AOHURZZBLMVYHSSFVBYOLSW"
+v <-strsplit(secretMessage ,"")[[1]]
+v <-ifelse(v=="A", 1,
+    ifelse(v=="B", 2,
+    ifelse(v=="C", 3,
+    ifelse(v=="D", 4,
+    ifelse(v=="E", 5,
+    ifelse(v=="F", 6,
+    ifelse(v=="G", 7,
+    ifelse(v=="H", 8,
+    ifelse(v=="I", 9,
+    ifelse(v=="J",10,
+    ifelse(v=="K",11,
+    ifelse(v=="L",12,
+    ifelse(v=="M",13,
+    ifelse(v=="N",14,
+    ifelse(v=="O",15,
+    ifelse(v=="P",16,
+    ifelse(v=="Q",17,
+    ifelse(v=="R",18,
+    ifelse(v=="S",19,
+    ifelse(v=="T",20,
+    ifelse(v=="U",21,
+    ifelse(v=="V",22,
+    ifelse(v=="W",23,
+    ifelse(v=="X",24,
+    ifelse(v=="Y",25,
+    ifelse(v=="Z",26,-1
+    ))))))))))))))))))))))))))
+print(v)
+
+```
+Problem 6
+```{r}
+secretMessage <- "AOHURZZBLMVYHSSFVBYOLSW"
+v <-strsplit(secretMessage ,"")[[1]]
+v <- factor(v, levels=LETTERS)
+print(as.numeric(v))
+
+```
+Problem 7
+```{r}
+message <- "AOHURZZBLMVYHSSFVBYOLSW"
+for(key in 1:25){
+   v <-strsplit(secretMessage ,"")[[1]]
+   v <- factor(v, levels=LETTERS)
+   v <- as.numeric(v)
+   print(shift(v, key))
+}
+
+```
+Problem 8
+```{r}
+toLetters <- function(numVec){
+  numVec <- factor(numVec, levels=1:26)  #using levels parameter
+  levels(numVec) <- LETTERS              #using levels() function
+  return(paste(numVec, collapse = ""))
+}
+for(key in 1:25){
+   v <-strsplit(secretMessage ,"")[[1]]
+   v <- factor(v, levels=LETTERS)
+   v <- as.numeric(v)
+   print(toLetters(shift(v, key)))
+}
+```
+Problem 10
+```{r}
+toLetters(shift(toNumbers(strip("Bon Jovi-Wan Kenobi, be on the lookout for a Sue.")),12))
+```
+Problem 11
+```{r}
+toLetters(shift(toNumbers(strip("AZITUOTEUPQPAQEMZQIAWTMHQYADQTMUD")),14))
+```
+Problem 12
+```{r}
+toLetters <- function(numVec){
+  numVec <- factor(numVec, levels=1:26)  #using levels parameter
+  levels(numVec) <- LETTERS              #using levels() function
+  return(paste(numVec, collapse = ""))
+}
+
+ewok <- "UIFPVUTJEF"
+for(key in 1:25){
+   v <-strsplit(ewok ,"")[[1]]
+   v <- factor(v, levels=LETTERS)
+   v <- as.numeric(v)
+   print(toLetters(shift(v, key)))
+}
+```

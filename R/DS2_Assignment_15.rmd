@@ -1,0 +1,50 @@
+
+```{r}
+A15_Small_Markets %>%
+   rename(Year = Time) %>%
+   arrange(Year, Country) -> wc
+
+```
+
+
+```{r}
+A15_Small_Markets %>%
+   rename(Year = Time) %>%
+   arrange(Year, Country) %>%
+   filter(GDP < 250) -> wc
+
+ggplot(wc,
+       aes(x=Year, y=GDP)) +
+  geom_point()
+
+wc
+```
+
+```{r}
+wc %>% 
+  mutate(Year = factor(Year)) %>%
+  ggplot(aes(x=Year, y=GDP)) +
+     geom_boxplot()
+
+
+```
+```{r}
+ggplot(wc,
+       aes(x=Year, y=GDP)) +
+  geom_bar(stat = "summary", fun = mean)
+
+```
+
+```{r}
+ggplot(wc,
+       aes(x=GDP, y=Country)) +
+   geom_boxplot()
+
+```
+```{r}
+ggplot(wc,
+       aes(x=Year, y=GDP)) +
+  geom_line(aes(color = Country))
+
+```
+

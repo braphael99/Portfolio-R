@@ -1,0 +1,105 @@
+Assignment Setup
+```{r}
+
+```
+
+Problem 1
+```{r}
+str(iris)
+head(iris)
+?iris
+summary(iris)
+iris
+```
+Problem 7
+```{r}
+boxplot(iris[[4]]~iris[[5]],
+        main = "Pedal Width by Iris Species",
+        ylab = "Centimeters",
+        xlab = ""
+)
+```
+Problem 9
+```{r}
+boxplot(iris[[3]]~iris[[5]],
+        main = "Pedal Length by Iris Species",
+        ylab = "Centimeters",
+        xlab = ""
+)
+
+```
+Problem 11
+```{r}
+boxplot(iris[[2]]~iris[[5]],
+        main = "Sepal Width by Iris Species",
+        ylab = "Centimeters",
+        xlab = "",
+        yaxt = "n",
+        ylim = c(2, 5)
+)
+axis(2,
+     at = 2:5
+)
+```
+Problem 12
+```{r}
+boxplot(iris[[1]]~iris[[5]],
+        main = "Sepal Length by Iris Species",
+        ylab = "",
+        xlab = "Species",
+        yaxt = "n",
+        ylim = c(4, 8),
+        col = c("red", "green", "blue")
+)
+axis(4,
+     at = 4:8,
+     las = 1
+)
+```
+Problem 13
+```{r}
+for(i in 1:4){
+  print(i)
+}
+
+```
+Problem 14
+```{r}
+for(i in 1:4){
+  j <- i^2
+  print(j)
+}
+
+```
+Problem 15
+```{r}
+for(i in c(3,4,2,2)){
+  j <- i^2
+  print( paste(i,j) )
+}
+
+```
+Problem 16
+```{r}
+par(mfrow=c(2,2))
+
+for(i in 1:4){
+   boxplot(iris[[i]]~iris[[5]],
+        main = paste(ifelse(i <= 2, "Sepal", "Petal"), ifelse(i %% 2 == 1, "Length", "Width")),
+        ylab = ifelse(i %% 2 == 1, "cm", ""),
+        xlab = ifelse(i <= 2, "", "Species"),
+        yaxt = "n",
+        col = c("red", "green", "blue")
+   )
+   axis(2,
+     at = 0:10,
+     las = 1
+   )
+}
+
+```
+
+Problem 17-20
+```{r}
+
+```

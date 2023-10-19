@@ -1,0 +1,187 @@
+Problem 1
+```{r}
+g<- function(x){
+  y <- x^3 + 4
+  return(y)
+}
+
+g(3)
+```
+
+Problem 3
+```{r}
+gettyTxt <- "Four score and seven years ago today, our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all people are created equal."
+
+toupper(gettyTxt)
+```
+Problem 4
+```{r}
+#string to vector of individual characters
+txt <- "R2 D2"
+letterVec <- strsplit(txt, "")[[1]]
+print(letterVec)
+
+length(letterVec)
+typeof(letterVec)
+
+```
+Problem 5
+```{r}
+#vector of individual characters to single string
+myLetters <- c("J","o","e")
+txt <- paste(myLetters, collapse="")
+print(txt)
+
+typeof(txt)
+```
+Problem 6
+```{r}
+numVec <- c(1,4,7,9)
+numVec <- numVec[ 3 < numVec & numVec < 8 ]
+print(numVec)
+
+```
+Problem 7
+```{r}
+letterVec <- c("A","G","P","U", "K")
+letterVec <- letterVec [ "D" < letterVec & letterVec < "S"]
+print(letterVec)
+
+```
+Problem 8
+```{r}
+#Define Function
+strip <- function(txt){
+  txt <- toupper(txt)
+  charVec <- strsplit(txt, "")[[1]]
+  letterVec <- charVec["A" <= charVec & charVec <= "Z"]
+  return( paste(letterVec , collapse="") )
+}
+
+#Use Function
+gettyPlain <- strip(gettyTxt)
+print(gettyPlain)
+
+```
+Problem 9
+```{r}
+v <- c("A", "B", "C", "A")  #start with vector of characters
+v <- factor(v)              #convert to factor
+v <- as.numeric(v)          #convert to vector of level numbers
+print(v)
+
+```
+Problem 12
+```{r}
+letters
+LETTERS
+
+```
+Problem 13
+```{r}
+#Define Function
+toNumbers <- function(plain){
+  letterVec <- strsplit(plain,"")[[1]]
+  letterVec <- factor(letterVec, levels=LETTERS)
+  return(as.numeric(letterVec))
+}
+
+#Use Function
+gettyPlain <- strip(gettyTxt)
+gettyNums <- toNumbers(gettyPlain)
+print(head(gettyNums))
+
+```
+
+Problem 14
+```{r}
+#Define Function - A first attempt
+shift <- function(nums, key){
+  nums <- nums + key
+  return(nums)
+}
+
+#Use Function
+myNums <- c(1,26)
+shift(myNums, 2)
+
+```
+Problem 15
+```{r}
+#Define Function - A second attempt
+shift <- function(nums, key){
+  nums <- nums + key
+  nums <- nums %% 26
+  return(nums)
+}
+
+#Use Function
+myNums <- c(1,24, 26)
+shift(myNums, 2)
+
+```
+Problem 17
+```{r}
+#Define Function - A second attempt
+shift <- function(nums, key){
+  nums <- nums + key
+  nums <- nums %% 26
+  nums <- ifelse(nums == 0, 26, nums)
+  return(nums)
+}
+
+#Use Function
+gettyPlain <- strip(gettyTxt)
+gettyNums <- toNumbers(gettyPlain)
+shift(gettyNums, 2)
+
+```
+Problem 21
+```{r}
+#Define Function
+toLetters <- function(numVec){
+  numVec <- factor(numVec, levels=1:26)
+  levels(numVec) <- LETTERS
+  return(numVec)
+
+}
+
+#Use Function
+myTxt <- "Ape"
+myPlain <- strip(myTxt)
+myNums <- toNumbers(myPlain)
+myShiftedNums <- shift(myNums, 1)
+toLetters(myShiftedNums)
+
+```
+Problem 23
+```{r}
+ssq <- function(x, y){
+  return(x^2 + y^2)
+}
+print(ssq(2,3)) #should output 13, which is 2^2 + 3^2
+print(ssq(4,2)) #should output 20, which is 4^2 + 2^2
+
+sqDiff <- function(x, y){
+  return((x-y)^2)
+}
+print(sqDiff(17,12))
+
+```
+Problem 24
+```{r}
+ssq <- function(x, y){
+  return(x^2 + y^2)
+}
+print(ssq(1:10,1:10))
+
+```
+Problem 25
+```{r}
+ssq <- function(x, y){
+  return(x^2 + y^2)
+}
+print(ssq(1:10,1:5))
+print(ssq(1:10,1:3)) #This line gives a warning. Why?
+
+```

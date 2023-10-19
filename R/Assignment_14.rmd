@@ -1,0 +1,169 @@
+Assignment Setup
+```{r}
+
+```
+
+Problem 1
+```{r}
+hair <- (1:100)^3 %% c(47,97)
+print(hair)
+
+```
+Problem 2
+```{r}
+plot(table(hair),
+     ylab="Frequency",
+     xlab = "mF/f",
+     xaxt = "n"
+)
+axis(side=1,            
+          at=seq(0,100,10)
+     )
+```
+Problem 4
+```{r}
+hist(hair,
+     breaks = 4,
+     xlab = "mF/f")
+```
+Problem 5
+```{r}
+boxplot(hair,
+        main = "A Hairy Boxplot",
+        ylab = "mF/f",
+        col = "red"
+        )
+```
+Problem 6
+```{r}
+boxplot(hair,
+        main = "A Hairy Boxplot",
+        xlab = "mF/f",
+        col = "white",
+        horizontal = T
+        )
+```
+Problem 7
+```{r}
+par(mfrow=c(2,1))   #Plot the next two graphs in 2x1 grid
+hist(hair,
+     main = "My Hair Graphs",
+     xlab = "",
+     ylab = "",
+     yaxt = "n",
+     col = "white")
+boxplot(hair,
+        xlab = "mF/f",
+        horizontal=T,
+        col = "white"
+        )
+
+```
+Problem 8
+```{r}
+par(mfrow=c(2,1))
+boxplot(hair,
+        main = "Hair Today, Gone Tomorrow",
+        xlab = "",
+        horizontal=T,
+        col = "orange",
+        ylim = c(0,100)
+        )
+hist(hair,
+     main = "",
+     xlab = "mF/f",
+     ylab = "",
+     yaxt = "n",
+     col = "white",
+     xlim = c(0,100)
+     )
+
+```
+Problem 9
+```{r}
+days <- rep(1:5,length=100)
+
+days <- factor(days)
+levels(days) <- c("M", "T", "W", "R", "F")
+par(mfrow=c(1,1))
+boxplot(hair~days,
+        main = "Growth Rate by Day",
+        ylab = "mF/f",
+        xlab = "",
+        col = c("red", "orange", "yellow", "green", "blue"),
+        ylim = c(0, 100),
+        las = 1
+        )
+
+```
+Problem 10
+```{r}
+filter <- (days == "M" | days == "F")
+sub.hair <- hair[filter]
+sub.days <- days[filter]
+sub.days <- droplevels(sub.days)
+boxplot(sub.hair~sub.days)
+```
+Problem 11
+```{r}
+filter <- (days == "T" | days == "W" | days == "R")
+sub.hair <- hair[filter]
+sub.days <- days[filter]
+sub.days <- droplevels(sub.days)
+levels(sub.days) <- c("Tues", "Wed", "Thurs")
+boxplot(sub.hair~sub.days,
+        ylab = "",
+        xlab = "",
+        col = "red",
+        las = 1)
+```
+Problem 12
+```{r}
+tab <- tapply(hair, days, mean)
+
+barplot(tab,
+        main = "Mean Growth Rate by Day",
+        ylab = "mF/f",
+        xlab = "Day"
+        )
+```
+Problem 14
+```{r}
+total.furlongs <- sum(hair * 1/14 * 1/1000000)
+```
+
+Problem 15
+```{r}
+total.inches <- total.furlongs * 220 * 36
+```
+
+Problem 17
+```{r}
+inches <- hair *(1/14) * (1/1000000) * 220 * 36
+tab1 <- tapply(inches, days, sum)
+tab1
+
+```
+Problem 18
+```{r}
+tab2 <- c(tab1,sum(tab1))
+tab2
+
+```
+Problem 19
+```{r}
+names(tab2)
+names(tab2)[6] <- "Total"
+names(tab2)
+
+```
+Problem 20
+```{r}
+barplot(tab2,
+        main = "Total Hair Growth by Day",
+        xlab = "Weekday",
+        ylab = "Inches",
+        las = 1,
+        ylim = c(0.0, 2.0)
+        )
+```

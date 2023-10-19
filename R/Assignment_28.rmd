@@ -1,0 +1,64 @@
+Problem 1
+```{r}
+dodgers <- read.csv(file = "dodgers.csv")
+df <- data.frame(
+  Attendance  = dodgers$attend,
+  Bobblehead  = dodgers$bobblehead
+)
+
+df$DOW <- factor(dodgers$day_of_week,
+                       levels= c("Monday", "Tuesday", "Wednesday","Thursday",
+                           "Friday","Saturday","Sunday"))
+levels(df$DOW) <- c("Mon", "Tue", "Wed","Thu","Fri","Sat","Sun")
+
+df$Month <- factor(dodgers$month,
+                   levels= c("APR","MAY","JUN","JUL","AUG","SEP","OCT"))
+levels(df$Month) <- c("Apr","May","Jun","Jul","Aug","Sep","Oct")
+
+myModel  <- lm(df$Attend ~ df$DOW + df$Month + df$Bobblehead)
+
+myModel
+```
+Problem 2
+```{r}
+round(myModel$coefficients)
+```
+Problem 8
+```{r}
+df$PredictedAttendance <- predict(myModel)
+```
+
+Problem 9
+```{r}
+plot(df$Attendance, df$PredictedAttendance)
+```
+Problem 10
+```{r}
+plot(df$Attendance/1000, df$PredictedAttendance/1000,
+     main = "Attendances",
+     ylab = "Predicted (thousands)",
+     xlab = "Actual (thousands)",
+     xlim = c(25,60),
+     ylim = c(25,60)
+     )
+```
+Problem 12
+```{r}
+plot(df$Attendance/1000, df$PredictedAttendance/1000,
+     main = "Attendances",
+     ylab = "Predicted (thousands)",
+     xlab = "Actual (thousands)",
+     xlim = c(25,60),
+     ylim = c(25,60)
+     )
+abline(a = 0, b = 1)
+```
+Problem 14
+```{r}
+rVal <- cor(df$Attendance, df$PredictedAttendance)
+```
+
+Problem 16
+```{r}
+rVal*rVal
+```

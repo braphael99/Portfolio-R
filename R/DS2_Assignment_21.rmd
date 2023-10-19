@@ -1,0 +1,89 @@
+```{r}
+
+#Suppress summarize() error messages
+options(dplyr.summarise.inform = FALSE)
+
+cootie <- A21_Cooties_Cases
+
+```
+
+```{r}
+arrange(cootie, country, year)
+```
+
+```{r}
+
+cootie %>% 
+  ggplot(aes(x = year, y = cases)) +
+     geom_point(aes(color = country))
+
+```
+
+```{r}
+
+cootie %>% 
+  ggplot(aes(x = year, y = cases)) +
+     geom_line(aes(color = country))
+
+```
+```{r}
+population <- tribble(
+    ~Country,    ~`2000`,  ~`2005`,  ~`2010`,  ~`2015`,  ~`2020`,
+
+   "Bulgium",   12500000, 12375000, 12250000, 12125000, 12000000,
+   "Grease",    10000000,  8947368,  8181818,  7600000,  7142857,
+   "Irelandra",  4285714,  4814815,  5384615,  6000000,  6666667,
+   "Noway",      3333333,  3750000,  4166667,  4583333,  5000000,
+   "Sloveniak",  2000000,  2380952,  2727273,  3043478,  3333333
+)
+
+```
+
+```{r}
+population1 <- pivot_longer(population,
+                            cols = 2:6,
+                            names_to = "year",
+                            values_to = "population")
+
+```
+
+```{r}
+left_join(cootie,
+          mutate(population1, year = as.numeric(year)))
+
+```
+
+```{r}
+left_join(rename(cootie, Country = country),
+          mutate(population1, year = as.numeric(year)))
+
+```
+
+```{r}
+full_cootie <- left_join(rename(cootie, Country = country),
+                         mutate(population1, year = as.numeric(year)))
+
+```
+
+```{r}
+full_cootie %>%
+  mutate(cases_per_100k = 1000000*cases/population) %>%
+  ggplot(aes(x = year, y = cases_per_100k)) +
+    geom_point(aes(color = Country))
+```
+
+```{r}
+full_cootie %>%
+  mutate(cases_per_100k = 1000000*cases/population) %>%
+  ggplot(aes(x = year, y = cases_per_100k)) +
+    geom_line(aes(color = Country))
+```
+
+```{r}
+full_cootie %>%
+  mutate(cases_per_100k = 1000000*cases/population) %>%
+  ggplot(aes(x = year, y = cases_per_100k)) +
+    geom_line(aes(color = Country))+
+    geom_point(aes(color = Country))
+```
+

@@ -1,0 +1,44 @@
+Problem 1
+```{r}
+wc <- A08_MPG100
+glimpse(wc)
+```
+Problem 2
+```{r}
+wc1 <- rename(wc, "Model" = X1)
+```
+
+Problem 3
+```{r}
+wc2 <- mutate(wc1, Year = factor(Year), Cylinders = factor(Cylinders))
+
+```
+
+Problem 7
+```{r}
+wc3 <- mutate(wc2, Model = str_to_lower(Model))
+```
+
+Problem 8
+```{r}
+wc4 <- arrange(wc3, Model, Cylinders, Class, Year)
+
+```
+
+problem 9
+```{r}
+wc5 <- filter(wc4, word(Model) == "toyota" | word(Model) == "volkswagen")
+
+```
+
+Problem 10
+```{r}
+wc6 <- mutate(wc5, Manufacturer = word(Model))
+glimpse(wc6)
+```
+Problem 12
+```{r}
+ggplot(data = wc6, aes(x = Manufacturer, y = MPG)) +
+   geom_boxplot()
+
+```

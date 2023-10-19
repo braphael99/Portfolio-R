@@ -1,0 +1,112 @@
+setup
+```{r}
+df <- airquality
+tg <-ToothGrowth
+```
+
+Problem 1
+```{r}
+df$Solar.R                #vector on the "inside" of expression
+is.na(df$Solar.R)         #function is.na() applied to vector
+sum(is.na(df$Solar.R))    #function sum() applied to previous result
+
+```
+Problem 3
+```{r}
+?ToothGrowth
+```
+
+Problem 4
+```{r}
+length(ToothGrowth)
+
+nrow(ToothGrowth)
+
+dim(ToothGrowth)
+```
+Problem 5
+```{r}
+summary(ToothGrowth)
+```
+Problem 6
+```{r}
+table(ToothGrowth$dose)
+```
+Problem 7
+```{r}
+table(ToothGrowth$supp,ToothGrowth$dose)
+```
+Problem 8
+```{r}
+hist(ToothGrowth$len,
+     main = "Tooth Growth Length",
+     xlab = "Length in MM",
+     ylab = "Number of Guinea Pigs")
+```
+Problem 9
+```{r}
+par(mfrow=c(1,2)) #Plots arranged in a 1x2 grid
+boxplot(ToothGrowth$len, main="Tooth Growth", ylab = "Millimeter")
+boxplot(ToothGrowth$len, main="Tooth Growth", xlab = "Millimeter", horizontal=T)
+
+```
+Problem 10
+```{r}
+boxplot( ToothGrowth$len ~ ToothGrowth$supp)
+```
+Problem 11
+```{r}
+boxplot( ToothGrowth$len ~ ToothGrowth$dose,
+         main = "Tooth Growth by Dosage",
+         ylab = "Millimeters",
+         xlab = "MG/ Day")
+```
+Problem 12
+```{r}
+tg$dose.type <- factor(tg$dose)
+levels(tg$dose.type) <- c("Low", "Med", "High")
+
+boxplot(tg$len ~ tg$dose.type,
+        main = "Tooth Growth by Dosage",
+        ylab = "Millimeters",
+        xlab = "Dosage Type")
+```
+Problem 14
+```{r}
+barplot(tg$dose)
+```
+Problem 15
+```{r}
+ barplot(table(tg$dose))
+```
+Problem 16
+```{r}
+levels(tg$supp) <- c("OJ", "AA")
+
+tg$supp
+```
+
+Problem 17
+```{r}
+tg$len.cm <- tg$len / 10
+
+tg$len
+tg$len.cm
+```
+Problem 18
+```{r}
+tg$cage.num <- sample(1:60, size = 60)
+
+tg$cage.num
+```
+Problem 19
+```{r}
+A <- 1:100
+print(A)
+B <- rep(1:10, each=10)
+print(B)
+boxplot(A , B)
+boxplot(A ~ B)
+
+```
+

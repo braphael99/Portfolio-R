@@ -1,0 +1,58 @@
+```{r}
+wc <- A24_Use_of_Force
+```
+
+```{r}
+wc %>% rename(Ethnicity = SubjectEthnicity) %>% count(Ethnicity)
+```
+
+```{r}
+wc %>% rename(Ethnicity = SubjectEthnicity) %>% count(Ethnicity, name="Freq")
+```
+
+```{r}
+wc %>% count(SubjectGender) %>% rename(Freq = n)
+```
+
+```{r}
+wc %>% 
+  mutate(SubjectEthnicity = fct_infreq(SubjectEthnicity)) %>% 
+  ggplot(aes(x = SubjectEthnicity)) +
+     geom_bar()
+
+```
+
+```{r}
+wc %>% 
+  mutate(SubjectGender = fct_infreq(SubjectGender)) %>% 
+  ggplot(aes(x = SubjectGender)) +
+     geom_bar()
+
+```
+
+```{r}
+ggplot(wc, aes(x = SubjectAge))   + geom_bar(aes(fill=SubjectGender))
+```
+
+```{r}
+ggplot(wc, aes(x = SubjectAge))   + geom_bar(aes(fill=SubjectGender), position="dodge")
+```
+
+```{r}
+ggplot(wc, aes(x = SubjectGender)) + geom_bar(aes(fill=SubjectAge))
+```
+```{r}
+ggplot(wc, aes(x = SubjectGender)) + geom_bar(aes(fill=SubjectAge), position = "dodge")
+```
+
+```{r}
+wc %>%
+  filter(str_detect(IncidentDate, "^11")) %>% 
+  mutate(Borough = fct_infreq(Borough)) %>% 
+  mutate(Borough = fct_rev(Borough)) %>%
+  group_by(Borough) %>% 
+  filter(n() > 500) %>% 
+  ggplot(aes(y = Borough)) + geom_bar()
+
+```
+

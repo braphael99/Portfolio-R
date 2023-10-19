@@ -1,0 +1,39 @@
+Problem 1
+```{r}
+wc <- A06_MPG104
+glimpse(wc)
+```
+Problem 2
+```{r}
+wc1 <- pivot_longer(data = wc,
+             cols = Year_2010:Year_2020,
+             names_prefix = "Year_",
+             names_to  = "Year",
+             values_to = "MPG"  
+)
+```
+
+PRoblem 7
+```{r}
+wc2 <- mutate(wc1, Code = NULL)
+wc3 <- rename(wc2, "Class" = class)
+wc4 <- select(wc3, Model, Year, Cylinders, MPG, Class)
+View(wc4)
+```
+
+Problem 12
+```{r}
+ggplot(data = wc4,
+       aes(y = MPG, x = Cylinders))+
+  geom_boxplot()
+```
+Problem 13
+```{r}
+ggplot(data = wc4,
+       aes(y = Class, x = MPG))+
+  geom_boxplot()
+```
+Problem 14
+```{r}
+wc4 %>% count(Class)
+```
